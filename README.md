@@ -6,15 +6,15 @@ Ballerina Regex Library
   [![Github issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-standard-library/module/regex.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-standard-library/labels/module%2Fregex)
   [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This Regex library is one of the standard libraries of <a target="_blank" href="https://ballerina.io/">Ballerina</a> language.
+This Regex library is one of the standard libraries of the <a target="_blank" href="https://ballerina.io/">Ballerina</a> language.
 
-It has support for regex functionalities like checking whether a string matches a given regex, replacing substrings and spliting strings based on a regex.
+It has support for regex functionalities like checking whether a string matches a given regex, replacing substrings, and splitting strings based on a regex.
 
 ## Issues and Projects
 
-Issues and Projects tabs are disabled for this repository as this is part of the Ballerina Standard Library. To report bugs, request new features, start new discussions, view project boards, etc. please visit Ballerina Standard Library [parent repository](https://github.com/ballerina-platform/ballerina-standard-library). 
+The **Issues** and **Projects** tabs are disabled for this repository as this is part of the Ballerina Standard Library. To report bugs, request new features, start new discussions, view project boards, etc., go to the Ballerina Standard Library [parent repository](https://github.com/ballerina-platform/ballerina-standard-library). 
 
-This repository only contains the source code for the module.
+This repository contains only the source code of the module.
 
 ## Building from the Source
 
@@ -56,7 +56,7 @@ For more information, go to the [contribution guidelines](https://github.com/bal
 
 ## Code of Conduct
 
-All contributors are encouraged to read [Ballerina Code of Conduct](https://ballerina.io/code-of-conduct).
+All contributors are encouraged to read the [Ballerina Code of Conduct](https://ballerina.io/code-of-conduct).
 
 ## Useful Links
 

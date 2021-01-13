@@ -30,7 +30,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
     return matchesExternal(java:fromString(stringToMatch), java:fromString(regex));
 }
 
-# Replaces each occurrence of the substrings, which matches the provided
+# Replaces each occurrence of the substrings, which match the provided
 # regular expression from the given original string value with the
 # provided replacement string.
 # ```ballerina
@@ -50,7 +50,7 @@ public isolated function replaceAll(string originalString, string regex, string 
     if (updatedString is string) {
         return updatedString;
     } else {
-        // should never reach here
+        // Should never reach here.
         error e = error(string `error occurred while replacing ${regex} in ${originalString}`);
         panic e;
     }
@@ -76,7 +76,7 @@ public isolated function replaceFirst(string originalString, string regex, strin
     if (updatedString is string) {
         return updatedString;
     } else {
-        // should never reach here
+        // Should never reach here.
         error e = error(string `error occurred while replacing ${regex} in ${originalString}`);
         panic e;
     }
