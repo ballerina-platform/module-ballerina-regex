@@ -1,6 +1,6 @@
-## Module overview
+## Package overview
 
-This module provides the following regex utility functions. 
+This package provides the following regex utility functions. 
 
 * `matches` - Checks whether a string matches a given regex.
 * `replaceAll` - Replaces every occurrence of a substring that matches a given regex in a string, with another string provided.
