@@ -14,7 +14,7 @@ It has support for regex functionalities like checking whether a string matches 
 
 The **Issues** and **Projects** tabs are disabled for this repository as this is part of the Ballerina Standard Library. To report bugs, request new features, start new discussions, view project boards, etc., go to the Ballerina Standard Library [parent repository](https://github.com/ballerina-platform/ballerina-standard-library). 
 
-This repository contains only the source code of the module.
+This repository contains only the source code of the package.
 
 ## Building from the Source
 
@@ -40,7 +40,7 @@ Execute the commands below to build from source.
 
         ./gradlew clean test
 
-3. To build the module without the tests:
+3. To build the package without the tests:
 
         ./gradlew clean build -x test
 
@@ -48,7 +48,7 @@ Execute the commands below to build from source.
 
         ./gradlew clean build -Pdebug=<port>
         
-5. To debug the module with Ballerina language:
+5. To debug the package with Ballerina language:
    
         ./gradlew clean build -PbalJavaDebug=<port>
         
