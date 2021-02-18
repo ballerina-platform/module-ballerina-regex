@@ -240,5 +240,4 @@ ballerinaPublish.dependsOn ballerinaBuild
 ballerinaPublish.finalizedBy revertTomlFile
 ballerinaPublish.dependsOn initializeVariables
 ballerinaPublish.dependsOn updateTomlVersions
-ballerinaPublish.dependsOn ":${packageName}-native:build"
 publish.dependsOn ballerinaPublish
