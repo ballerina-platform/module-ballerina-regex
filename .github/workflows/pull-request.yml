@@ -35,7 +35,8 @@ jobs:
             name: Code Coverage JSON
             path: regex-ballerina/target/report/test_results.json
             if-no-files-found: ignore  
-      - name: Generate CodeCov Report
+      - name: Generate Codecov Report
+        if: github.event_name == 'pull_request'
         uses: codecov/codecov-action@v1
         
   windows-build:
