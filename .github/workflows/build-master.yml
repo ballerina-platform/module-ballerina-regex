@@ -25,6 +25,8 @@ jobs:
         env:
           packageUser: ${{ secrets.BALLERINA_BOT_USERNAME }}
           packagePAT: ${{ secrets.BALLERINA_BOT_TOKEN }}
+          username = System.getenv("publishUser")
+          password = System.getenv("publishPAT")
         run: |
           ./gradlew publish --scan
       - name: Archive Error Log
