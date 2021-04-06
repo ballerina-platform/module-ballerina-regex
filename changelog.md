@@ -7,5 +7,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.6.3] - 2021-01-22
 
 ### Added
-
 - [Add regex functions](https://github.com/ballerina-platform/ballerina-standard-library/issues/1223)
