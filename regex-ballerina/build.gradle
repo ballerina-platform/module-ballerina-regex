@@ -22,8 +22,7 @@ description = 'Ballerina - Regex Ballerina Generator'
 def packageName = "regex"
 def packageOrg = "ballerina"
 def platform = "java11"
-def snapshotVersion = "-SNAPSHOT"
-def tomlVersion = project.version.replace("${snapshotVersion}", "")
+def tomlVersion = stripBallerinaExtensionVersion("${project.version}")
 def ballerinaConfigFile = new File("$project.projectDir/Ballerina.toml")
 def artifactBallerinaDocs = file("$project.projectDir/build/docs_parent/")
 def artifactCacheParent = file("$project.projectDir/build/cache_parent/")
@@ -32,6 +31,20 @@ def artifactTestableJar = file("$project.projectDir/target/cache/${packageOrg}/$
 def ballerinaCentralAccessToken = System.getenv('BALLERINA_CENTRAL_ACCESS_TOKEN')
 def originalConfig = ballerinaConfigFile.text
 def distributionBinPath = project.projectDir.absolutePath + "/build/target/extracted-distributions/jballerina-tools-zip/jballerina-tools-${ballerinaLangVersion}/bin"
+
+def stripBallerinaExtensionVersion(String extVersion) {
+    if (extVersion.matches(project.ext.timestampedVersionRegex)) {
+        def splitVersion = extVersion.split('-');
+        if (splitVersion.length > 3) {
+            def strippedValues = splitVersion[0..-4]
+            return strippedValues.join('-')
+        } else {
+            return extVersion
+        }
+    } else {
+        return extVersion.replace("${project.ext.snapshotVersion}", "")
+    }
+}
 
 configurations {
     jbalTools
@@ -84,12 +97,6 @@ def needPublishToCentral = false
 def needPublishToLocalCentral = false
 
 task initializeVariables {
-    if (project.hasProperty("groups")) {
-        groupParams = "--groups ${project.findProperty("groups")}"
-    }
-    if (project.hasProperty("disable")) {
-        disableGroups = "--disable-groups ${project.findProperty("disable")}"
-    }
     if (project.hasProperty("debug")) {
         debugParams = "--debug ${project.findProperty("debug")}"
     }
@@ -238,6 +245,10 @@ publishing {
 
 updateTomlVersions.dependsOn unpackJballerinaTools
 
+ballerinaBuild.dependsOn unpackJballerinaTools
+ballerinaBuild.dependsOn initializeVariables
+ballerinaBuild.dependsOn updateTomlVersions
+ballerinaBuild.finalizedBy revertTomlFile
 test.dependsOn ballerinaBuild
 build.dependsOn ballerinaBuild
 
