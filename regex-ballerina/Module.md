@@ -7,4 +7,3 @@ regular expression as a `String` to perform these operations by finding matches 
 character strings. If a particular string is in the set described by a regular expression, the regular expression matches that string.
 
 For information on the operations, which you can perform with the regex module, see the below **Functions**.
- 
