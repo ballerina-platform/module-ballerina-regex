@@ -17,7 +17,7 @@
 import ballerina/jballerina.java;
 
 
-# Checks whether the given string matches the provided regex.
+# Checks whether the given string matches the provided `regex`.
 # ```ballerina
 # boolean isMatched = regex:matches("Ballerina is great", "Ba[a-z ]+");
 # ```
