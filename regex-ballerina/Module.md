@@ -1,4 +1,4 @@
-## Module overview
+## Module Overview
 
 This module provides functions for searching, splitting, and replacing the set of characters of the string. These APIs are using a 
 regular expression as a `String` to perform these operations by finding matches string.
