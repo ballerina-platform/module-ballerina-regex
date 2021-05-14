@@ -31,7 +31,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 }
 
 # Replaces each occurrence of the substrings, which match the provided
-# regular expression from the given original string value with the
+# `regex` from the given original string value with the
 # provided replacement string.
 # ```ballerina
 # string result = regex:replaceAll("Ballerina is great", "\s+", "_");
@@ -56,7 +56,7 @@ public isolated function replaceAll(string originalString, string regex, string 
     }
 }
 
-# Replaces the first substring that matches the given regular expression with
+# Replaces the first substring that matches the given `regex` with
 # the provided `replacement` string.
 # ```ballerina
 # string result = regex:replaceFirst("Ballerina is great", "\s+", "_");

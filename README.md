@@ -11,6 +11,8 @@ This Regex library is one of the standard libraries of the <a target="_blank" hr
 
 This provides functions for regex functionalities like checking whether a string matches a given regex, replacing substrings, and splitting strings based on a regex.
 
+For more information go to [The Regex Module](https://docs.central.ballerina.io/ballerina/regex/latest).
+
 For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 
 ## Issues and Projects
