@@ -9,7 +9,7 @@ Ballerina Regex Library
 
 This Regex library is one of the standard libraries of the <a target="_blank" href="https://ballerina.io/">Ballerina</a> language.
 
-This provides functions for regex functionalities like checking whether a string matches a given regex, replacing substrings, and splitting strings based on a regex.
+This provides functions for regex functionalities such as checking whether a string matches a given regex, replacing substrings, and splitting strings based on a regex.
 
 For more information go to [The Regex Module](https://docs.central.ballerina.io/ballerina/regex/latest).
 
