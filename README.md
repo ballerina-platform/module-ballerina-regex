@@ -7,9 +7,13 @@ Ballerina Regex Library
   [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
   [![codecov](https://codecov.io/gh/ballerina-platform/module-ballerina-regex/branch/main/graph/badge.svg)](https://codecov.io/gh/ballerina-platform/module-ballerina-regex)
 
-This Regex library is one of the standard libraries of the <a target="_blank" href="https://ballerina.io/">Ballerina</a> language.
+The `regex` library is one of the standard libraries of the <a target="_blank" href="https://ballerina.io/">Ballerina</a> language.
 
-It has support for regex functionalities like checking whether a string matches a given regex, replacing substrings, and splitting strings based on a regex.
+This provides functions for regex functionalities such as checking whether a string matches a given regex, replacing substrings, and splitting strings based on a regex.
+
+For more information go to [The Regex Module](https://docs.central.ballerina.io/ballerina/regex/latest).
+
+For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 
 ## Issues and Projects
 
