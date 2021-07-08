@@ -12,8 +12,9 @@ plugins {
 }
 
 rootProject.name = 'regex'
-include(':build-config:checkstyle')
 include ':regex-ballerina'
+
+project(':regex-ballerina').projectDir = file('ballerina')
 
 gradleEnterprise {
     buildScan {
