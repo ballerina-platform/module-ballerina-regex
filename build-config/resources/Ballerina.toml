@@ -1,5 +1,5 @@
 [package]
 org = "ballerina"
 name = "regex"
-version = "1.0.0"
+version = "@toml.version@"
 distribution = "slbeta3"
