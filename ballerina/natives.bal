@@ -59,7 +59,7 @@ public isolated function replaceAll(string originalString, string regex, string 
 # Replaces the first substring that matches the given `regex` with
 # the provided `replacement` string.
 # ```ballerina
-string result = regex:replaceFirst("Ballerina is great", "\\s+", "_");
+# string result = regex:replaceFirst("Ballerina is great", "\\s+", "_");
 # ```
 #
 # + originalString - The original string to replace the occurrences of the
