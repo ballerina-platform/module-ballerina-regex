@@ -2,4 +2,8 @@
 org = "ballerina"
 name = "regex"
 version = "1.0.1"
+authors = ["Ballerina"]
+keywords = ["regex", "string", "regular expressions"]
+repository = "https://github.com/ballerina-platform/module-ballerina-regex"
+license = ["Apache-2.0"]
 distribution = "slbeta3"
