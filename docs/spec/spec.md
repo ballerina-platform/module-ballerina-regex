@@ -16,8 +16,8 @@ makes it easier to use, combine, and create network services.
 1. [Overview](#1-overview)
 2. [Operations](#2-operations)
     * 2.1. [Matches](#21-matches)
-    * 2.2. [ReplaceAll](#22-replace-all)
-    * 2.3. [ReplaceFirst](#23-replace-first)
+    * 2.2. [Replace All](#22-replace-all)
+    * 2.3. [Replace First](#23-replace-first)
     * 2.4. [Split](#24-split)
 
 # 1. Overview
@@ -59,3 +59,5 @@ This splits a string into an array of substrings, using the provided regex as th
 ```ballerina
 string[] split = regex:split("Ballerina is a programming language", " ");
 ```
+
+The above would return a string array `["Ballerina", "is", "a", "programming", "language"]`
