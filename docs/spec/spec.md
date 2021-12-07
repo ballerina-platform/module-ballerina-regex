@@ -1,6 +1,6 @@
 # Specification: Ballerina Regex Library
 
-_Owners_: @daneshk @kalaiyarasiganeshalingam
+_Owners_: @daneshk @kalaiyarasiganeshalingam  
 _Reviewers_: @daneshk  
 _Created_: 2021/12/07   
 _Updated_: 2021/12/07  
@@ -38,9 +38,7 @@ replacement string.
 ```ballerina
 string replaced = regex:replaceAll("Ballerina is a programming language", " ", "_");
 ```
-
-The above would replace all whitespace characters with underscores.
-
+The above would replace all whitespace characters with underscores.  
 `Ballerina is a programming language` → `Ballerina_is_a_programming_language`
 
 ## 2.3. Replace First
@@ -50,8 +48,7 @@ the provided replacement string.
 string firstReplaced = regex:replaceFirst("Ballerina is a programming language", " ", "_");
 ```
 
-The above would replace all whitespace characters with underscores.
-
+The above would replace all whitespace characters with underscores.  
 `Ballerina is a programming language` → `Ballerina_is a programming language`
 
 ## 2.4. Split
@@ -59,5 +56,5 @@ This splits a string into an array of substrings, using the provided regex as th
 ```ballerina
 string[] split = regex:split("Ballerina is a programming language", " ");
 ```
-
-The above would return a string array `["Ballerina", "is", "a", "programming", "language"]`
+The above would return a string array.  
+`["Ballerina", "is", "a", "programming", "language"]`
