@@ -29,32 +29,25 @@ for describing sets of character strings that specify a search pattern.
 ## 2.1. Matches
 This is used to check whether a string matches the provided regex.
 ```ballerina
-boolean isMatched = regex:matches("Ballerina is great", "Ba[a-z ]+");
+public isolated function matches(string stringToMatch, string regex) returns boolean;
 ```
 
 ## 2.2. Replace All
 This replaces all occurrences of substrings that matches the provided regex in the original string with the provided
 replacement string.
 ```ballerina
-string replaced = regex:replaceAll("Ballerina is a programming language", " ", "_");
+public isolated function replaceAll(string originalString, string regex, string replacement) returns string;
 ```
-The above would replace all whitespace characters with underscores.  
-`Ballerina is a programming language` → `Ballerina_is_a_programming_language`
 
 ## 2.3. Replace First
 This replaces only the first occurrence of the substring that matches the provided regex in the original string with 
 the provided replacement string.
 ```ballerina
-string firstReplaced = regex:replaceFirst("Ballerina is a programming language", " ", "_");
+public isolated function replaceFirst(string originalString, string regex, string replacement) returns string;
 ```
-
-The above would replace all whitespace characters with underscores.  
-`Ballerina is a programming language` → `Ballerina_is a programming language`
 
 ## 2.4. Split
 This splits a string into an array of substrings, using the provided regex as the delimiter.
 ```ballerina
-string[] split = regex:split("Ballerina is a programming language", " ");
+public isolated function split(string receiver, string delimiter) returns string[];
 ```
-The above would return a string array.  
-`["Ballerina", "is", "a", "programming", "language"]`
