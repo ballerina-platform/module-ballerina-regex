@@ -16,7 +16,6 @@
 
 import ballerina/jballerina.java;
 
-
 # Checks whether the given string matches the provided `regex`.
 # ```ballerina
 # boolean isMatched = regex:matches("Ballerina is great", "Ba[a-z ]+");
@@ -24,8 +23,7 @@ import ballerina/jballerina.java;
 #
 # + stringToMatch - The string to match the regex
 # + regex - The regex to match the string
-# + return - `true` if the provided string matches the regex or else
-#            `false`
+# + return - `true` if the provided string matches the regex or else `false`
 public isolated function matches(string stringToMatch, string regex) returns boolean {
     return matchesExternal(java:fromString(stringToMatch), java:fromString(regex));
 }
@@ -40,14 +38,14 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 # + originalString - The original string to replace the occurrences of the
 #                    substrings that match the provided `regex`
 # + regex - The regex to match the substrings in the `originalString` to be replaced
-# + replacement - The `replacement` string to replace the subsgrings, which
+# + replacement - The `replacement` string to replace the substrings, which
 #                 match the `regex`
 # + return - The resultant string with the replaced substrings
 public isolated function replaceAll(string originalString, string regex, string replacement) returns string {
     handle value = replaceAllExternal(java:fromString(originalString), java:fromString(regex),
                                       java:fromString(replacement));
     string? updatedString = java:toString(value);
-    if (updatedString is string) {
+    if updatedString is string {
         return updatedString;
     } else {
         // Should never reach here.
@@ -62,8 +60,8 @@ public isolated function replaceAll(string originalString, string regex, string 
 # string result = regex:replaceFirst("Ballerina is great", "\\s+", "_");
 # ```
 #
-# + originalString - The original string to replace the occurrences of the
-#                    substrings that match the provided `regex`
+# + originalString - The original string to replace the first occurrence of the
+#                    substring that matches the provided `regex`
 # + regex - The regex to match the first substring in the `originalString` to
 #           be replaced
 # + replacement - The `replacement` string to replace the first substring, which
@@ -73,7 +71,7 @@ public isolated function replaceFirst(string originalString, string regex, strin
     handle value = replaceFirstExternal(java:fromString(originalString), java:fromString(regex),
                                         java:fromString(replacement));
     string? updatedString = java:toString(value);
-    if (updatedString is string) {
+    if updatedString is string {
         return updatedString;
     } else {
         // Should never reach here.
@@ -95,7 +93,6 @@ public isolated function split(string receiver, string delimiter) returns string
     handle res = splitExternal(java:fromString(receiver), java:fromString(delimiter));
     return getBallerinaStringArray(res);
 }
-
 
 // Interoperable external functions.
 isolated function matchesExternal(handle stringToMatch, handle regex) returns boolean = @java:Method {
