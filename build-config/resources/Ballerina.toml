@@ -6,4 +6,4 @@ authors = ["Ballerina"]
 keywords = ["regex", "string", "regular expressions"]
 repository = "https://github.com/ballerina-platform/module-ballerina-regex"
 license = ["Apache-2.0"]
-distribution = "slbeta3"
+distribution = "2201.0.0"
