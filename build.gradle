@@ -75,4 +75,5 @@ release {
 
 task build {
     dependsOn('regex-ballerina:build')
+    dependsOn('regex-examples:build')
 }
