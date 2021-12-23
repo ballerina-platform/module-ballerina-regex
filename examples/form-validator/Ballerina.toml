@@ -2,3 +2,9 @@
 org = "wso2"
 name = "form_validator"
 version = "0.1.0"
+
+[[dependency]]
+org = "ballerina"
+name = "http"
+version = "2.2.0"
+repository = "central"
