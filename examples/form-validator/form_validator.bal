@@ -76,7 +76,7 @@ service /validate on new http:Listener(8080) {
         return true;
     }
 
-    isolated resource function post user(@http:Payload User user) returns boolean|string[]|error {
+    isolated resource function get user(@http:Payload User user) returns boolean|error {
         boolean errorFlag = false;
         string[] errorMessages = [];
 
