@@ -17,8 +17,8 @@
 import ballerina/regex;
 import ballerina/http;
 
-// Regex for a username containing at between 4-20 alpha-numeric and period characters only
-final string usernameRegex = "^(?=.{4,20}$)[a-zA-Z0-9.]+$";
+// Regex for a username containing at between 4-20 alpha-numeric, period and underscore characters only
+final string usernameRegex = "^(?=.{4,20}$)[a-zA-Z0-9._]+$";
 
 // Regex for a password containing at least 8 characters, one number, and both uppercase and lowercase characters
 final string passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$";
