@@ -39,9 +39,9 @@ task testExamples {
                 exec {
                     workingDir "${project.projectDir}/${example}"
                     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-                        commandLine 'cmd', '/c', "${ballerinaDist}/bin/bal.bat test --offline && exit %%ERRORLEVEL%%"
+                        commandLine 'cmd', '/c', "${ballerinaDist}/bin/bal.bat test && exit %%ERRORLEVEL%%"
                     } else {
-                        commandLine 'sh', '-c', "${ballerinaDist}/bin/bal test --offline"
+                        commandLine 'sh', '-c', "${ballerinaDist}/bin/bal test"
                     }
                 }
             } catch (Exception e) {
@@ -64,9 +64,9 @@ task buildExamples {
                 exec {
                     workingDir project.projectDir
                     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-                        commandLine 'cmd', '/c', "${ballerinaDist}/bin/bal.bat pack --offline ${example} && exit %%ERRORLEVEL%%"
+                        commandLine 'cmd', '/c', "${ballerinaDist}/bin/bal.bat build ${example} && exit %%ERRORLEVEL%%"
                     } else {
-                        commandLine 'sh', '-c', "${ballerinaDist}/bin/bal pack --offline ${example}"
+                        commandLine 'sh', '-c', "${ballerinaDist}/bin/bal build ${example}"
                     }
                 }
             } catch (Exception e) {
