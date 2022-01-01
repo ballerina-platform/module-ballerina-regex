@@ -13,8 +13,10 @@ plugins {
 
 rootProject.name = 'regex'
 include ':regex-ballerina'
+include ':regex-examples'
 
 project(':regex-ballerina').projectDir = file('ballerina')
+project(':regex-examples').projectDir = file('examples')
 
 gradleEnterprise {
     buildScan {
