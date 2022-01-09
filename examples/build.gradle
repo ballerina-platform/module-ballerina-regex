@@ -77,7 +77,7 @@ task buildExamples {
     }
 }
 
-testExamples.dependsOn ":regex-ballerina:build"
-test.dependsOn testExamples
-buildExamples.dependsOn ":regex-ballerina:build"
-build.dependsOn buildExamples
+//testExamples.dependsOn ":regex-ballerina:build"
+//test.dependsOn testExamples
+//buildExamples.dependsOn ":regex-ballerina:build"
+//build.dependsOn buildExamples
