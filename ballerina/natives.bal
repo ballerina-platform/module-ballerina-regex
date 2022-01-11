@@ -21,7 +21,7 @@ import ballerina/jballerina.java;
 # boolean isMatched = regex:matches("Ballerina is great", "Ba[a-z ]+");
 # ```
 #
-# + stringToMatch - The string to match the regex
+# + stringToMatch - The string to match the `regex`
 # + regex - The regex to match the string
 # + return - `true` if the provided string matches the regex or else `false`
 public isolated function matches(string stringToMatch, string regex) returns boolean {
@@ -37,7 +37,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 #
 # + originalString - The original string to replace the occurrences of the
 #                    substrings that match the provided `regex`
-# + regex - The regex to match the substrings in the `originalString` to be replaced
+# + regex - The `regex` to match the substrings in the `originalString` to be replaced
 # + replacement - The `replacement` string to replace the substrings, which
 #                 match the `regex`
 # + return - The resultant string with the replaced substrings
@@ -62,7 +62,7 @@ public isolated function replaceAll(string originalString, string regex, string 
 #
 # + originalString - The original string to replace the first occurrence of the
 #                    substring that matches the provided `regex`
-# + regex - The regex to match the first substring in the `originalString` to
+# + regex - The `regex` to match the first substring in the `originalString` to
 #           be replaced
 # + replacement - The `replacement` string to replace the first substring, which
 #                 matches the `regex`
@@ -81,13 +81,13 @@ public isolated function replaceFirst(string originalString, string regex, strin
 }
 
 # Returns an array of strings by splitting a string using the provided
-# delimiter.
+# `regex` as the delimiter.
 # ```ballerina
 # string[] result = regex:split("Ballerina is great", " ");
 # ```
 #
 # + receiver - The string to split
-# + delimiter - The delimiter to split by
+# + delimiter - The delimiter is a `regex` that splits the given string
 # + return - An array of strings containing the individual strings that are split
 public isolated function split(string receiver, string delimiter) returns string[] {
     handle res = splitExternal(java:fromString(receiver), java:fromString(delimiter));
