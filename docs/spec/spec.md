@@ -22,7 +22,7 @@ makes it easier to use, combine, and create network services.
 
 # 1. Overview
 This library is based on [regular expressions](https://en.wikipedia.org/wiki/Regular_expression), which are notations 
-for describing sets of character strings that specify a search pattern. It supports the [regular expression pattern of Java](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html#sum).
+for describing sets of character strings that specify a search pattern. It supports the [regular expression patterns of Java](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html#sum).
 
 # 2. Operations
 
