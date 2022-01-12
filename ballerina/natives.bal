@@ -87,7 +87,7 @@ public isolated function replaceFirst(string originalString, string regex, strin
 # ```
 #
 # + receiver - The string to split
-# + delimiter - The delimiter is a `regex` that splits the given string
+# + delimiter - The delimiter is a `regex`, which splits the given string
 # + return - An array of strings containing the individual strings that are split
 public isolated function split(string receiver, string delimiter) returns string[] {
     handle res = splitExternal(java:fromString(receiver), java:fromString(delimiter));
