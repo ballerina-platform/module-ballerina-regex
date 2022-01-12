@@ -37,7 +37,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 #
 # + originalString - The original string to replace the occurrences of the
 #                    substrings that match the provided `regex`
-# + regex - The `regex` to match the substrings in the `originalString` to be replaced
+# + regex - The `regex` to match the substrings in the `originalString` , which is to be replaced
 # + replacement - The `replacement` string to replace the substrings, which
 #                 match the `regex`
 # + return - The resultant string with the replaced substrings
