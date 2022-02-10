@@ -7,13 +7,13 @@ Ballerina Regex Library
   [![Github issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-standard-library/module/regex.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-standard-library/labels/module%2Fregex)
   [![codecov](https://codecov.io/gh/ballerina-platform/module-ballerina-regex/branch/main/graph/badge.svg)](https://codecov.io/gh/ballerina-platform/module-ballerina-regex)
 
-The `regex` library is one of the standard libraries of the <a target="_blank" href="https://ballerina.io/">Ballerina</a> language.
+This module provides APIs for searching, splitting, and replacing the set of characters of a string. These APIs are using a
+regular expression as a `String` to perform these operations by finding the string matches.
 
-This provides functions for regex functionalities such as checking whether a string matches a given regex, replacing substrings, and splitting strings based on a regex.
+[Regular expressions](https://en.wikipedia.org/wiki/Regular_expression), are notations for describing sets of
+character strings. If a particular string is in the set described by a regular expression, the regular expression matches that string.
 
-For more information go to [The Regex Module](https://docs.central.ballerina.io/ballerina/regex/latest).
-
-For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
+For a quick sample on demonstrating the usage, see [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 
 ## Issues and Projects
 
@@ -81,5 +81,7 @@ All contributors are encouraged to read the [Ballerina Code of Conduct](https://
 
 ## Useful Links
 
+* For more information go to the [`regex` library](https://lib.ballerina.io/ballerina/regex/latest).
+* For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 * Chat live with us on our [Slack channel](https://ballerina.io/community/slack/).
 * Technical questions should be posted on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
