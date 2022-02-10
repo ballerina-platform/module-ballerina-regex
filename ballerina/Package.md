@@ -6,7 +6,7 @@ regular expression as a `String` to perform these operations by finding the stri
 [Regular expressions](https://en.wikipedia.org/wiki/Regular_expression), are notations for describing sets of
 character strings. If a particular string is in the set described by a regular expression, the regular expression matches that string.
 
-### Report Issues
+## Report Issues
 
 To report bugs, request new features, start new discussions, view project boards, etc., go to the [Ballerina standard library parent repository](https://github.com/ballerina-platform/ballerina-standard-library).
 
