@@ -1,14 +1,16 @@
 ## Package Overview
 
-The `regex` library is one of the standard libraries of the <a target="_blank" href="https://ballerina.io/">Ballerina</a> language.
+This module provides APIs for searching, splitting, and replacing the set of characters of a string. These APIs are using a
+regular expression as a `String` to perform these operations by finding the string matches.
 
-This package provides functions for regex functionalities such as checking whether a string matches a given regex, replacing substrings, and splitting strings based on a regex.
+[Regular expressions](https://en.wikipedia.org/wiki/Regular_expression), are notations for describing sets of
+character strings. If a particular string is in the set described by a regular expression, the regular expression matches that string.
 
 ## Report Issues
 
-To report bugs, request new features, start new discussions, view project boards, etc., go to the <a target="_blank" href="https://github.com/ballerina-platform/ballerina-standard-library">Ballerina standard library parent repository</a>.
+To report bugs, request new features, start new discussions, view project boards, etc., go to the [Ballerina standard library parent repository](https://github.com/ballerina-platform/ballerina-standard-library).
 
-## Useful Links
+### Useful Links
 
-- Chat live with us via our <a target="_blank" href="https://ballerina.io/community/slack/">Slack channel</a>.
-- Post all technical questions on Stack Overflow with the <a target="_blank" href="https://stackoverflow.com/questions/tagged/ballerina">#ballerina</a> tag.
+- Chat live with us via our [Slack channel](https://ballerina.io/community/slack/).
+- Post all technical questions on Stack Overflow with the [#ballerina](https://stackoverflow.com/questions/tagged/ballerina) tag.
