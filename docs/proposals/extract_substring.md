@@ -68,5 +68,5 @@ public isolated function search(string str, string regex, int startIndex = 0) re
 # + regex - The regex value
 # + return - An array of `Match` records
 # Each member holds a matched substring
-public isolated function searchAll(string str, string regex) returns Match[] {}
+public isolated function searchAll(string str, string regex) returns Match[];
 ```
