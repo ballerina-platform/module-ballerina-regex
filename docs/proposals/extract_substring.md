@@ -70,5 +70,3 @@ public isolated function search(string str, string regex, int startIndex = 0) re
 # Each member holds a matched substring
 public isolated function searchAll(string str, string regex) returns Match[] {}
 ```
-
-
