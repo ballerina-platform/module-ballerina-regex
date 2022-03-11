@@ -1,3 +1,11 @@
+# Proposal: Introduce APIs to extract a substring/s from the given string
+
+_Owners_: @daneshk @kalaiyarasiganeshalingam  
+_Reviewers_: @daneshk  
+_Created_: 2022/03/11   
+_Updated_: 2022/03/11  
+_Issues_: [#2689](https://github.com/ballerina-platform/ballerina-standard-library/issues/2689) 
+
 ## Summary
 The Ballerina Regex module doesn't have any API to extract a substring/s from the given string by using regex. So, this proposal introduces new APIs to extract a substring/s from the given string using regex.
 
