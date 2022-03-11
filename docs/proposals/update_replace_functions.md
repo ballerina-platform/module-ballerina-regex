@@ -10,6 +10,7 @@ _Issues_: [#2772](https://github.com/ballerina-platform/ballerina-standard-libra
 The existing replacement functions don't support the following functionalities:
 - There is no way to replace the matches from the particular string index of the given string.
 - There isn't any mechanism to replace the matches with a dynamic value.
+
 So, this proposal improves the replacement functions to support the above functionalities.
 
 ## Goals
