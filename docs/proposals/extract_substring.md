@@ -56,7 +56,8 @@ Groups groups;
 ```ballerina
 # Returns the first substring in str that matches the regex.
 # ```ballerina
-# regex:Match? result = regex:search("Betty Botter bought some butter but she said the butter’s bitter.", "\\b[bB].tt[a-z]*");
+# regex:Match? result = regex:search("Betty Botter bought some butter but she said the butter’s bitter.", 
+#                                    "\\b[bB].tt[a-z]*");
 # ```
 #
 # + str - The string to be matched
@@ -69,7 +70,8 @@ public isolated function search(string str, string regex, int startIndex = 0) re
 ```ballerina
 # Returns all substrings in str that match the regex.
 # ```ballerina
-# regex:Match[] result = regex:searchAll(""Betty Botter bought some butter but she said the butter’s bitter.", "\\b[bB].tt[a-z]*");
+# regex:Match[] result = regex:searchAll("Betty Botter bought some butter but she said the butter’s bitter.", 
+#                                       "\\b[bB].tt[a-z]*");
 # ```
 #
 # + str - The string to be matched
