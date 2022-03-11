@@ -10,8 +10,7 @@ _Issues_: [#2689](https://github.com/ballerina-platform/ballerina-standard-libra
 The Ballerina Regex module doesn't have any API to extract a substring/s from the given string by using regex. So, this proposal introduces new APIs to extract a substring/s from the given string using regex.
 
 ## Goals
-
-- Provide a way to extract a substring/s using regex.
+Provide a way to extract a substring/s using regex.
 
 ## Motivation
 As mentioned in the summary, at the moment, users have no way to extract a substring/s from the given string. But this is an important feature in string manipulation. So, this allows users to extract a substring/s easily by using Ballerina.
@@ -30,6 +29,7 @@ int startIndex;
 int endIndex;
 |};
 ```
+
 ```ballerina
 # Holds information about matched regex groups
 public type Groups readonly & object {
