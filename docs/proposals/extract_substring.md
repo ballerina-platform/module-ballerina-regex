@@ -63,7 +63,7 @@ Groups groups;
 # + regex - The regex value
 # + startIndex - The starting index for the search
 # + return - a `Match` record which holds the matched substring, or nil if there is no match
-public isolated function search(string str, string regex, int startIndex = 0) returns Match? {}
+public isolated function search(string str, string regex, int startIndex = 0) returns Match?;
 ```
 
 ```ballerina
@@ -76,5 +76,5 @@ public isolated function search(string str, string regex, int startIndex = 0) re
 # + regex - The regex value
 # + return - An array of `Match` records
 # Each member holds a matched substring
-public isolated function searchAll(string str, string regex) returns Match[] {}
+public isolated function searchAll(string str, string regex) returns Match[];
 ```
