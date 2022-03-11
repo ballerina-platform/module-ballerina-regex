@@ -7,7 +7,7 @@ _Updated_: 2022/03/11
 _Issues_: [#2772](https://github.com/ballerina-platform/ballerina-standard-library/issues/2772) 
 
 ## Summary
-The existing replace function doesn't support the following functionalities:
+The existing replacement functions don't support the following functionalities:
 - There is no way to replace the matches from the particular string index of the given string.
 - There isn't any mechanism to replace the matches with a dynamic value.
 
