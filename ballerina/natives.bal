@@ -44,8 +44,12 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 public isolated function replace(string originalString, string regex, Replacement replacement,
                                 int startIndex = 0) returns string {
     string subString = getSubstring(originalString, startIndex);
+    string|error replacementString = getReplacementString(originalString, regex, replacement, startIndex);
+    if (replacementString is error) {
+        return originalString;
+    }
     handle|error value = trap replaceFirstExternal(java:fromString(subString), java:fromString(regex),
-                                        java:fromString(getReplacementString(originalString, regex, replacement, startIndex)));
+                                                   java:fromString(replacementString));
     if (value is handle) {
         string? updatedString = java:toString(value);
         if updatedString is string {
@@ -74,8 +78,8 @@ public isolated function replaceAll(string originalString, string regex, Replace
         int startIndex = 0; 
         Match[] matchedArray = searchAll(originalString, regex);
         foreach Match matched in matchedArray {
-            string val = getReplacementString1(matched, replacement);
-            updatedString += strings:substring(originalString, startIndex, matched.startIndex) + val;
+            updatedString += strings:substring(originalString, startIndex, matched.startIndex) +
+                                               getStringFromReplacerFunction(matched, replacement);
             startIndex = matched.endIndex;
         }
         if (startIndex < originalString.length()) {

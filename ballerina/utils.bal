@@ -24,22 +24,21 @@ isolated function getSubstring(string str, int startIndex) returns string {
     return strings:substring(str, startIndex, str.length());
 }
 
-isolated function getReplacementString(string str, string regex, Replacement replacement, int startIndex = 0) returns string {
+isolated function getReplacementString(string str, string regex, Replacement replacement, int startIndex = 0)
+                            returns string|error {
     if replacement is string {
         return replacement;
     } else {
         Match?|error matched = trap search(str, regex, startIndex);
         if matched is Match {
             return replacement(matched);
-        } else if matched is error {
-            panic error("There is no matching substrig in the given string." + matched.message());
         } else {
-            panic error("There is no matching substrig in the given string.");
+            return error("There is no matching substrig in the given string.");
         }
     }    
 }
 
-isolated function getReplacementString1(Match matched, ReplacerFunction replacement) returns string {
+isolated function getStringFromReplacerFunction(Match matched, ReplacerFunction replacement) returns string {
     return replacement(matched);
 }
 
@@ -67,6 +66,9 @@ readonly class MatchGroups {
     }
 
     isolated function get(int index) returns PartMatch? {
+        if (index < 0 || index > self.count) {
+            panic error("There is no capturing group in the pattern with the given index " + index.toString() + ".");
+        }
         if self.value is string { // Getting the group data for the`searchAll` group(i)
             Match? matched = search(self.value.toString(), self.regex.toString());
             if matched is Match {
@@ -83,12 +85,7 @@ readonly class MatchGroups {
         } else {
             handle|error group = trap getGroup(self.matcher, index);
             if group is error {
-                string msg = group.message();
-                if (msg.endsWith("IndexOutOfBoundsException")) {
-                    panic error("There is no capturing group in the pattern with the given index " + index.toString() + ".");
-                } else if (msg.endsWith("IllegalStateException") ) {
-                    return null;
-                }
+                return null; // IllegalStateException(No match found)
             }
             string? valueInString = java:toString(group);
             if valueInString is string {

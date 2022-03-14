@@ -42,6 +42,24 @@ isolated function testReplaceAll1() {
     test:assertEquals(actualvalue, "1*1*11", msg = "String values are not equal");
 }
 
+@test:Config {}
+isolated function testReplaceAllWithNoMatches() {
+    string original = "100100011";
+    string regex = "95";
+    string replacement = "*";
+    string actualvalue = replaceAll(original, regex, replacement);
+    test:assertEquals(actualvalue, original, msg = "String values are not equal");
+}
+
+@test:Config {}
+isolated function testReplaceAllWithEmptyReplacementValue() {
+    string original = "100100011";
+    string regex = "0+";
+    string replacement = "";
+    string actualvalue = replaceAll(original, regex, replacement);
+    test:assertEquals(actualvalue, "1111", msg = "String values are not equal");
+}
+
 isolated function replacementFuctionForReplaceAll(Match matched) returns string {
     return matched.matched.length().toString();
 }
@@ -52,6 +70,14 @@ isolated function testReplaceAllWithReplacementFuction() {
     string regex = "0+";
     string actualvalue = replaceAll(original, regex, replacementFuctionForReplaceAll);
     test:assertEquals(actualvalue, "151311", msg = "String values are not equal");
+}
+
+@test:Config {}
+isolated function testReplaceAllWithReplacementFuction1() {
+    string original = "10000010001";
+    string regex = "0+";
+    string actualvalue = replaceAll(original, regex, replacementFuctionForReplaceAll);
+    test:assertEquals(actualvalue, "15131", msg = "String values are not equal");
 }
 
 @test:Config {}
@@ -82,6 +108,14 @@ isolated function testReplaceWithReplacementFuction() {
     string regex = "0+";
     string actualvalue = replace(original, regex, replacementFuctionForReplace);
     test:assertEquals(actualvalue, "13100011", msg = "String values are not equal");
+}
+
+@test:Config {}
+isolated function testReplaceWithReplacementFuction1() {
+    string original = "100100011";
+    string regex = "2";
+    string actualvalue = replace(original, regex, replacementFuctionForReplace);
+    test:assertEquals(actualvalue, "100100011", msg = "String values are not equal");
 }
 
 @test:Config {}
