@@ -30,7 +30,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 }
 
 # Replaces the first substring that matches the given regex with
-# the provided replacement string.
+# the provided replacement string or string returned by the provided function.
 # ```ballerina
 # string result = regex:replace("Ballerina is great", "\\s+", "_");
 # ```
