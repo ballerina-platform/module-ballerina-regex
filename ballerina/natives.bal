@@ -42,7 +42,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 # + startIndex - The starting index for the search
 # + return - The resultant string with the replaced substring
 public isolated function replace(string originalString, string regex, Replacement replacement,
-                                int startIndex = 0) returns string|Error {
+                                int startIndex = 0) returns string {
     string subString = getSubstring(originalString, startIndex);
     handle|error value = trap replaceFirstExternal(java:fromString(subString), java:fromString(regex),
                                         java:fromString(getReplacementString(originalString, regex, replacement, startIndex)));
@@ -68,7 +68,7 @@ public isolated function replace(string originalString, string regex, Replacemen
 # + replacement - The replacement string to replace the substrings, which
 #                 match the regex
 # + return - The resultant string with the replaced substrings
-public isolated function replaceAll(string originalString, string regex, Replacement replacement) returns string|Error {
+public isolated function replaceAll(string originalString, string regex, Replacement replacement) returns string {
     if (replacement is ReplacerFunction) {
         string updatedString = "";
         int startIndex = 0; 

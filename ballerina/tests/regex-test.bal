@@ -25,20 +25,20 @@ isolated function testMatches() {
 }
 
 @test:Config {}
-isolated function testReplaceAll() returns error? {
+isolated function testReplaceAll() {
     string original = "ReplaceTTTGGGThis";
     string regex = "T.*G";
     string replacement = " ";
-    string actualvalue = check replaceAll(original, regex, replacement);
+    string actualvalue = replaceAll(original, regex, replacement);
     test:assertEquals(actualvalue, "Replace This", msg = "String values are not equal");
 }
 
 @test:Config {}
-isolated function testReplaceAll1() returns error? {
+isolated function testReplaceAll1() {
     string original = "100100011";
     string regex = "0+";
     string replacement = "*";
-    string actualvalue = check replaceAll(original, regex, replacement);
+    string actualvalue = replaceAll(original, regex, replacement);
     test:assertEquals(actualvalue, "1*1*11", msg = "String values are not equal");
 }
 
@@ -47,10 +47,10 @@ isolated function replacementFuctionForReplaceAll(Match matched) returns string 
 }
 
 @test:Config {}
-isolated function testReplaceAllWithReplacementFuction() returns error? {
+isolated function testReplaceAllWithReplacementFuction() {
     string original = "100000100011";
     string regex = "0+";
-    string actualvalue = check replaceAll(original, regex, replacementFuctionForReplaceAll);
+    string actualvalue = replaceAll(original, regex, replacementFuctionForReplaceAll);
     test:assertEquals(actualvalue, "151311", msg = "String values are not equal");
 }
 
@@ -64,11 +64,11 @@ isolated function testReplaceFirst() {
 }
 
 @test:Config {}
-isolated function testReplace() returns error? {
+isolated function testReplace() {
     string original = "10010011";
     string regex = "0+";
     string replacement = "*";
-    string actualvalue = check replace(original, regex, replacement);
+    string actualvalue = replace(original, regex, replacement);
     test:assertEquals(actualvalue, "1*10011", msg = "String values are not equal");
 }
 
@@ -77,18 +77,18 @@ isolated function replacementFuctionForReplace(Match matched) returns string {
 }
 
 @test:Config {}
-isolated function testReplaceWithReplacementFuction() returns error? {
+isolated function testReplaceWithReplacementFuction() {
     string original = "100100011";
     string regex = "0+";
-    string actualvalue = check replace(original, regex, replacementFuctionForReplace);
+    string actualvalue = replace(original, regex, replacementFuctionForReplace);
     test:assertEquals(actualvalue, "13100011", msg = "String values are not equal");
 }
 
 @test:Config {}
-isolated function testReplaceWithStartIndex() returns error? {
+isolated function testReplaceWithStartIndex() {
     string original = "100100011";
     string regex = "0+";
-    string actualvalue = check replace(original, regex, replacementFuctionForReplace, 4);
+    string actualvalue = replace(original, regex, replacementFuctionForReplace, 4);
     test:assertEquals(actualvalue, "1001711", msg = "String values are not equal");
 }
 
