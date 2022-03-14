@@ -83,7 +83,8 @@ public isolated function replaceAll(string originalString, string regex, Replace
         }
         return updatedString;
     } else {
-        handle|error value = trap replaceAllExternal(java:fromString(originalString), java:fromString(regex), java:fromString(replacement));
+        handle|error value = trap replaceAllExternal(java:fromString(originalString), java:fromString(regex),
+                                  java:fromString(replacement));
         if value is handle {
             string? updatedString = java:toString(value);
             if updatedString is string {
@@ -112,7 +113,7 @@ public isolated function replaceAll(string originalString, string regex, Replace
 @deprecated
 public isolated function replaceFirst(string originalString, string regex, string replacement) returns string {
     handle|error value = trap replaceFirstExternal(java:fromString(originalString), java:fromString(regex),
-                                        java:fromString(replacement));
+                                                   java:fromString(replacement));
     if value is handle {
         string? updatedString = java:toString(value);
         if updatedString is string {

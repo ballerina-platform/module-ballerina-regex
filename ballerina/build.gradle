@@ -103,7 +103,7 @@ publishing {
     }
 }
 
-updateTomlFiles.dependsOn copyStdlibs
+updateTomlFiles.dependsOn unpackJballerinaTools
 
 build.dependsOn "generatePomFileForMavenPublication"
 

@@ -44,7 +44,7 @@ allprojects {
         }
 
         maven {
-            url = 'https://maven.pkg.github.com/ballerina-platform/*'
+            url = 'https://maven.pkg.github.com/ballerina-platform/ballerina-lang'
             credentials {
                 username System.getenv("packageUser")
                 password System.getenv("packagePAT")
@@ -58,17 +58,6 @@ allprojects {
     }
 }
 
-subprojects {
-
-    configurations {
-        ballerinaStdLibs
-    }
-    dependencies {
-
-        /* Standard libraries */
-        ballerinaStdLibs "io.ballerina.stdlib:io-ballerina:${stdlibIoVersion}"
-    }
-}
 def moduleVersion = project.version.replace("-SNAPSHOT", "")
 
 release {
