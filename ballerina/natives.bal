@@ -45,12 +45,12 @@ public isolated function replace(string originalString, string regex, Replacemen
                                 int startIndex = 0) returns string {
     string extractedString = getSubstring(originalString, startIndex);
     string|error replacementString = getReplacementString(originalString, regex, replacement, startIndex);
-    if (replacementString is error) {
+    if replacementString is error {
         return originalString;
     }
-    handle|error value = trap replaceFirstExternal(java:fromString(subString), java:fromString(regex),
+    handle|error value = trap replaceFirstExternal(java:fromString(extractedString), java:fromString(regex),
                                                    java:fromString(replacementString));
-    if (value is handle) {
+    if value is handle {
         string? updatedString = java:toString(value);
         if updatedString is string {
             return strings:substring(originalString, 0, startIndex) + updatedString;
@@ -152,8 +152,8 @@ public isolated function split(string receiver, string delimiter) returns string
 # + startIndex - The starting index for the search
 # + return - a `Match` record which holds the matched substring, or nil if there is no match
 public isolated function search(string str, string regex, int startIndex = 0) returns Match? {
-    string subString = getSubstring(str, startIndex);
-    handle matcher = getMatcher(subString, regex);
+    string extractedString = getSubstring(str, startIndex);
+    handle matcher = getMatcher(extractedString, regex);
     if isMatched(matcher) {
         handle group = getGroup(matcher, 0);
         string? value = java:toString(group);
