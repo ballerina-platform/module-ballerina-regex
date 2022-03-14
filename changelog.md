@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-
 - [Introduce new API to extract a substring/s from the given string](https://github.com/ballerina-platform/ballerina-standard-library/issues/2769)
 - [Inntroduce new API `replace` instead of `replaceFirst`](https://github.com/ballerina-platform/ballerina-standard-library/issues/2772)
 
