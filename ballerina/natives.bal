@@ -43,7 +43,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 # + return - The resultant string with the replaced substring
 public isolated function replace(string originalString, string regex, Replacement replacement,
                                 int startIndex = 0) returns string {
-    string subString = getSubstring(originalString, startIndex);
+    string extractedString = getSubstring(originalString, startIndex);
     string|error replacementString = getReplacementString(originalString, regex, replacement, startIndex);
     if (replacementString is error) {
         return originalString;
