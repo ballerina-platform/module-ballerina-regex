@@ -52,7 +52,8 @@ API improvements are:
     public isolated function replaceAll(string originalString, string regex, Replacement replacement) returns string;
     ```
 
-- Change the type of replacement param from string to `Replacement` type and introduce a new param `startIndex`.
+- Introduce a new function to replace the first substring from the given start index of the string.
+  This is an improved function from the `replaceFirst`.
     ```ballerina
     # Replaces the first substring that matches the given regex with
     # the provided replacement string or function.
@@ -70,4 +71,22 @@ API improvements are:
     # + return - The resultant string with the replaced substring
     public isolated function replace(string originalString, string regex, Replacement replacement, int startIndex = 0) 
                              returns string;
+    ```
+  
+- Deprecate the existing `replaceFirst` function.
+    ```ballerina
+    # Replaces the first substring that matches the given regex with
+    # the provided replacement string.
+    # ```ballerina
+    # string result = regex:replaceFirst("Ballerina is great", "\\s+", "_");
+    # ```
+    #
+    # + originalString - The original string to replace the first occurrence of the
+    #                    substring that matches the provided regex
+    # + regex - The regex to match the first substring in the `originalString` to
+    #           be replaced
+    # + replacement - The replacement string to replace the first substring, which
+    #                 matches the regex
+    # + return - The resultant string with the replaced substring
+    public isolated function replaceFirst(string originalString, string regex, string replacement) returns string;
     ```
