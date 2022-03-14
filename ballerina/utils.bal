@@ -35,7 +35,7 @@ isolated function getReplacementString(string str, string regex, Replacement rep
         } else {
             return error("There is no matching substrig in the given string.");
         }
-    }    
+    }
 }
 
 isolated function getStringFromReplacerFunction(Match matched, ReplacerFunction replacement) returns string {

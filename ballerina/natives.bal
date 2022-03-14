@@ -54,7 +54,7 @@ public isolated function replace(string originalString, string regex, Replacemen
         string? updatedString = java:toString(value);
         if updatedString is string {
             return strings:substring(originalString, 0, startIndex) + updatedString;
-        } 
+        }
     }
     return originalString;
 }
@@ -75,7 +75,7 @@ public isolated function replace(string originalString, string regex, Replacemen
 public isolated function replaceAll(string originalString, string regex, Replacement replacement) returns string {
     if (replacement is ReplacerFunction) {
         string updatedString = "";
-        int startIndex = 0; 
+        int startIndex = 0;
         Match[] matchedArray = searchAll(originalString, regex);
         foreach Match matched in matchedArray {
             updatedString += strings:substring(originalString, startIndex, matched.startIndex) +
@@ -88,15 +88,15 @@ public isolated function replaceAll(string originalString, string regex, Replace
         return updatedString;
     } else {
         handle|error value = trap replaceAllExternal(java:fromString(originalString), java:fromString(regex),
-                                  java:fromString(replacement));
+                                                     java:fromString(replacement));
         if value is handle {
             string? updatedString = java:toString(value);
             if updatedString is string {
                 return updatedString;
-            } 
+            }
         }
         return originalString;
-    } 
+    }
 }
 
 # Replaces the first substring that matches the given regex with
@@ -189,11 +189,11 @@ public isolated function searchAll(string str, string regex) returns Match[] {
             int startIndex = getStartIndex(matcher);
             matched.push(
                 {
-                    matched: valueInString,
-                    startIndex: startIndex,
-                    endIndex: getEndIndex(matcher),
-                    groups: new MatchGroups(matcher, startIndex, regex, valueInString)
-                }
+                matched: valueInString,
+                startIndex: startIndex,
+                endIndex: getEndIndex(matcher),
+                groups: new MatchGroups(matcher, startIndex, regex, valueInString)
+            }
             );
         }
     }
