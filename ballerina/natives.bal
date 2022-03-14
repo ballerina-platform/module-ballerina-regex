@@ -38,7 +38,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 # + originalString - The original string to replace the first occurrence of the
 #                    substring that matches the provided regex
 # + regex - The regex to match the first substring in the `originalString` to be replaced
-# + replacement - The replacement string to replace the first substring, which matches the regex
+# + replacement - The replacement string or A function to be invoked to create the new substring to be used to replace the first match to the given regex
 # + startIndex - The starting index for the search
 # + return - The resultant string with the replaced substring
 public isolated function replace(string originalString, string regex, Replacement replacement,
