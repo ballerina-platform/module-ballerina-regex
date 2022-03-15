@@ -24,21 +24,10 @@ isolated function getSubstring(string str, int startIndex) returns string {
     return strings:substring(str, startIndex, str.length());
 }
 
-isolated function getReplacementString(string str, string regex, Replacement replacement, int startIndex = 0)
-                            returns string|error {
+isolated function getReplacementString(Match matched, Replacement replacement) returns string {
     if replacement is string {
         return replacement;
-    } else {
-        Match?|error matched = trap search(str, regex, startIndex);
-        if matched is Match {
-            return replacement(matched);
-        } else {
-            return error("There is no matching substrig in the given string.");
-        }
     }
-}
-
-isolated function getStringFromReplacerFunction(Match matched, ReplacerFunction replacement) returns string {
     return replacement(matched);
 }
 

@@ -38,25 +38,25 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 # + originalString - The original string to replace the first occurrence of the
 #                    substring that matches the provided regex
 # + regex - The regex to match the first substring in the `originalString` to be replaced
-# + replacement - The replacement string or A function to be invoked to create the new substring to be used to replace the first match to the given regex
+# + replacement - The replacement string or A function to be invoked to create the new substring to be
+#                 used to replace the first match to the given regex
 # + startIndex - The starting index for the search
 # + return - The resultant string with the replaced substring
 public isolated function replace(string originalString, string regex, Replacement replacement,
                                 int startIndex = 0) returns string {
-    string extractedString = getSubstring(originalString, startIndex);
-    string|error replacementString = getReplacementString(originalString, regex, replacement, startIndex);
-    if replacementString is error {
+    Match? matched = search(originalString, regex, startIndex);
+    if (matched is null) {
         return originalString;
     }
-    handle|error value = trap replaceFirstExternal(java:fromString(extractedString), java:fromString(regex),
-                                                   java:fromString(replacementString));
-    if value is handle {
-        string? updatedString = java:toString(value);
-        if updatedString is string {
-            return strings:substring(originalString, 0, startIndex) + updatedString;
-        }
+    int index = 0;
+    int length = originalString.length();
+    string updatedString = strings:substring(originalString, index, matched.startIndex) +
+                                        getReplacementString(matched, replacement);
+    index = matched.endIndex;
+    if (index < length) {
+        updatedString += strings:substring(originalString, index, length);
     }
-    return originalString;
+    return updatedString;
 }
 
 # Replaces each occurrence of the substrings, which match the provided
@@ -73,30 +73,21 @@ public isolated function replace(string originalString, string regex, Replacemen
 #                 match the regex
 # + return - The resultant string with the replaced substrings
 public isolated function replaceAll(string originalString, string regex, Replacement replacement) returns string {
-    if (replacement is ReplacerFunction) {
-        string updatedString = "";
-        int startIndex = 0;
-        Match[] matchedArray = searchAll(originalString, regex);
-        foreach Match matched in matchedArray {
-            updatedString += strings:substring(originalString, startIndex, matched.startIndex) +
-                                               getStringFromReplacerFunction(matched, replacement);
-            startIndex = matched.endIndex;
-        }
-        if (startIndex < originalString.length()) {
-            updatedString += strings:substring(originalString, startIndex, originalString.length());
-        }
-        return updatedString;
-    } else {
-        handle|error value = trap replaceAllExternal(java:fromString(originalString), java:fromString(regex),
-                                                     java:fromString(replacement));
-        if value is handle {
-            string? updatedString = java:toString(value);
-            if updatedString is string {
-                return updatedString;
-            }
-        }
+    Match[] matchedArray = searchAll(originalString, regex);
+    if matchedArray.length() == 0 {
         return originalString;
     }
+    string updatedString = "";
+    int startIndex = 0;
+    foreach Match matched in matchedArray {
+        updatedString += strings:substring(originalString, startIndex, matched.startIndex) +
+                                           getReplacementString(matched, replacement);
+        startIndex = matched.endIndex;
+    }
+    if (startIndex < originalString.length()) {
+        updatedString += strings:substring(originalString, startIndex, originalString.length());
+    }
+    return updatedString;
 }
 
 # Replaces the first substring that matches the given regex with
@@ -205,12 +196,6 @@ isolated function matchesExternal(handle stringToMatch, handle regex) returns bo
     name: "matches",
     'class: "java.lang.String",
     paramTypes: ["java.lang.String"]
-} external;
-
-isolated function replaceAllExternal(handle originalString, handle regex, handle replacement) returns handle = @java:Method {
-    name: "replaceAll",
-    'class: "java.lang.String",
-    paramTypes: ["java.lang.String", "java.lang.String"]
 } external;
 
 isolated function replaceFirstExternal(handle originalString, handle regex, handle replacement) returns handle = @java:Method {
