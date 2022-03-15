@@ -38,14 +38,14 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 # + originalString - The original string to replace the first occurrence of the
 #                    substring that matches the provided regex
 # + regex - The regex to match the first substring in the `originalString` to be replaced
-# + replacement - The replacement string or A function to be invoked to create the new substring to be
+# + replacement - The replacement string or a function to be invoked to create the new substring to be
 #                 used to replace the first match to the given regex
 # + startIndex - The starting index for the search
 # + return - The resultant string with the replaced substring
 public isolated function replace(string originalString, string regex, Replacement replacement,
                                 int startIndex = 0) returns string {
     Match? matched = search(originalString, regex, startIndex);
-    if matched is null {
+    if matched is () {
         return originalString;
     }
     int index = 0;
@@ -159,7 +159,7 @@ public isolated function search(string str, string regex, int startIndex = 0) re
             return matched;
         }
     }
-    return null;
+    return ();
 }
 
 # Returns all substrings in string that match the regex.
@@ -185,8 +185,7 @@ public isolated function searchAll(string str, string regex) returns Match[] {
                 startIndex: startIndex,
                 endIndex: getEndIndex(matcher),
                 groups: new MatchGroups(matcher, startIndex, regex, valueInString)
-            }
-            );
+            });
         }
     }
     return matched;
