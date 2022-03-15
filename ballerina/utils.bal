@@ -44,7 +44,6 @@ readonly class MatchGroups {
     private int startIndex;
     private string? value;
     private string regex;
-    int count;
 
     isolated function init(handle matcher, int startIndex, string regex = "", string? value = ()) {
         self.matcher = matcher;
