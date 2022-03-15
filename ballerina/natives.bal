@@ -45,7 +45,7 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 public isolated function replace(string originalString, string regex, Replacement replacement,
                                 int startIndex = 0) returns string {
     Match? matched = search(originalString, regex, startIndex);
-    if (matched is null) {
+    if matched is null {
         return originalString;
     }
     int index = 0;
@@ -53,7 +53,7 @@ public isolated function replace(string originalString, string regex, Replacemen
     string updatedString = strings:substring(originalString, index, matched.startIndex) +
                                         getReplacementString(matched, replacement);
     index = matched.endIndex;
-    if (index < length) {
+    if index < length {
         updatedString += strings:substring(originalString, index, length);
     }
     return updatedString;
@@ -84,7 +84,7 @@ public isolated function replaceAll(string originalString, string regex, Replace
                                            getReplacementString(matched, replacement);
         startIndex = matched.endIndex;
     }
-    if (startIndex < originalString.length()) {
+    if startIndex < originalString.length() {
         updatedString += strings:substring(originalString, startIndex, originalString.length());
     }
     return updatedString;
@@ -114,8 +114,9 @@ public isolated function replaceFirst(string originalString, string regex, strin
         if updatedString is string {
             return updatedString;
         }
+        panic error(string `error occurred while replacing ${regex} in ${originalString}`);
     }
-    return originalString;
+    panic error(string `error occurred while replacing ${regex} in ${originalString}: ` + value.detail().toString());
 }
 
 # Returns an array of strings by splitting a string using the provided
