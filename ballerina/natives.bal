@@ -15,6 +15,7 @@
 // under the License.
 
 import ballerina/jballerina.java;
+import ballerina/lang.'string as strings;
 
 # Checks whether the given string matches the provided regex.
 # ```ballerina
@@ -28,6 +29,36 @@ public isolated function matches(string stringToMatch, string regex) returns boo
     return matchesExternal(java:fromString(stringToMatch), java:fromString(regex));
 }
 
+# Replaces the first substring that matches the given regex with
+# the provided replacement string or string returned by the provided function.
+# ```ballerina
+# string result = regex:replace("Ballerina is great", "\\s+", "_");
+# ```
+#
+# + originalString - The original string to replace the first occurrence of the
+#                    substring that matches the provided regex
+# + regex - The regex to match the first substring in the `originalString` to be replaced
+# + replacement - The replacement string or a function to be invoked to create the new substring to be
+#                 used to replace the first match to the given regex
+# + startIndex - The starting index for the search
+# + return - The resultant string with the replaced substring
+public isolated function replace(string originalString, string regex, Replacement replacement,
+                                int startIndex = 0) returns string {
+    Match? matched = search(originalString, regex, startIndex);
+    if matched is () {
+        return originalString;
+    }
+    int index = 0;
+    int length = originalString.length();
+    string updatedString = strings:substring(originalString, index, matched.startIndex) +
+                                        getReplacementString(matched, replacement);
+    index = matched.endIndex;
+    if index < length {
+        updatedString += strings:substring(originalString, index, length);
+    }
+    return updatedString;
+}
+
 # Replaces each occurrence of the substrings, which match the provided
 # regex from the given original string value with the
 # provided replacement string.
@@ -38,20 +69,25 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 # + originalString - The original string to replace the occurrences of the
 #                    substrings that match the provided regex
 # + regex - The regex to match the substrings in the `originalString` , which is to be replaced
-# + replacement - The replacement string to replace the substrings, which
-#                 match the regex
+# + replacement - The replacement string or a function to be invoked to create the new substring to be
+#                 used to replace the first match to the given regex
 # + return - The resultant string with the replaced substrings
-public isolated function replaceAll(string originalString, string regex, string replacement) returns string {
-    handle value = replaceAllExternal(java:fromString(originalString), java:fromString(regex),
-                                      java:fromString(replacement));
-    string? updatedString = java:toString(value);
-    if updatedString is string {
-        return updatedString;
-    } else {
-        // Should never reach here.
-        error e = error(string `error occurred while replacing ${regex} in ${originalString}`);
-        panic e;
+public isolated function replaceAll(string originalString, string regex, Replacement replacement) returns string {
+    Match[] matchedArray = searchAll(originalString, regex);
+    if matchedArray.length() == 0 {
+        return originalString;
     }
+    string updatedString = "";
+    int startIndex = 0;
+    foreach Match matched in matchedArray {
+        updatedString += strings:substring(originalString, startIndex, matched.startIndex) +
+                                           getReplacementString(matched, replacement);
+        startIndex = matched.endIndex;
+    }
+    if startIndex < originalString.length() {
+        updatedString += strings:substring(originalString, startIndex, originalString.length());
+    }
+    return updatedString;
 }
 
 # Replaces the first substring that matches the given regex with
@@ -67,17 +103,20 @@ public isolated function replaceAll(string originalString, string regex, string 
 # + replacement - The replacement string to replace the first substring, which
 #                 matches the regex
 # + return - The resultant string with the replaced substring
+# # Deprecated
+# This function will be removed in a later. Use `replace` instead.
+@deprecated
 public isolated function replaceFirst(string originalString, string regex, string replacement) returns string {
-    handle value = replaceFirstExternal(java:fromString(originalString), java:fromString(regex),
-                                        java:fromString(replacement));
-    string? updatedString = java:toString(value);
-    if updatedString is string {
-        return updatedString;
-    } else {
-        // Should never reach here.
-        error e = error(string `error occurred while replacing ${regex} in ${originalString}`);
-        panic e;
+    handle|error value = trap replaceFirstExternal(java:fromString(originalString), java:fromString(regex),
+                                                   java:fromString(replacement));
+    if value is handle {
+        string? updatedString = java:toString(value);
+        if updatedString is string {
+            return updatedString;
+        }
+        panic error(string `error occurred while replacing ${regex} in ${originalString}`);
     }
+    panic error(string `error occurred while replacing ${regex} in ${originalString}: ` + value.detail().toString());
 }
 
 # Returns an array of strings by splitting a string using the provided
@@ -94,17 +133,69 @@ public isolated function split(string receiver, string delimiter) returns string
     return getBallerinaStringArray(res);
 }
 
+# Returns the first substring in str that matches the regex.
+# ```ballerina
+# regex:Match? result = regex:search("Betty Botter bought some butter but she said the butter’s bitter.",
+#                                    "\\b[bB].tt[a-z]*");
+# ```
+#
+# + str - The string to be matched
+# + regex - The regex value
+# + startIndex - The starting index for the search
+# + return - a `Match` record which holds the matched substring, or nil if there is no match
+public isolated function search(string str, string regex, int startIndex = 0) returns Match? {
+    string extractedString = getSubstring(str, startIndex);
+    handle matcher = getMatcher(extractedString, regex);
+    if isMatched(matcher) {
+        handle group = getGroup(matcher, 0);
+        string? value = java:toString(group);
+        if value is string {
+            Match matched = {
+                matched: value,
+                startIndex: getStartIndex(matcher) + startIndex,
+                endIndex: getEndIndex(matcher) + startIndex,
+                groups: new MatchGroups(matcher, startIndex)
+            };
+            return matched;
+        }
+    }
+    return ();
+}
+
+# Returns all substrings in string that match the regex.
+# ```ballerina
+# regex:Match[] result = regex:searchAll("Betty Botter bought some butter but she said the butter’s bitter.",
+#                                      "\\b[bB].tt[a-z]*");
+# ```
+#
+# + str - The string to be matched
+# + regex - The regex value
+# + return - An array of `Match` records
+public isolated function searchAll(string str, string regex) returns Match[] {
+    handle matcher = getMatcher(str, regex);
+    Match[] matched = [];
+    while isMatched(matcher) {
+        handle group = getGroup(matcher, 0);
+        string? valueInString = java:toString(group);
+        if valueInString is string {
+            int startIndex = getStartIndex(matcher);
+            matched.push(
+                {
+                matched: valueInString,
+                startIndex: startIndex,
+                endIndex: getEndIndex(matcher),
+                groups: new MatchGroups(matcher, startIndex, regex, valueInString)
+            });
+        }
+    }
+    return matched;
+}
+
 // Interoperable external functions.
 isolated function matchesExternal(handle stringToMatch, handle regex) returns boolean = @java:Method {
     name: "matches",
     'class: "java.lang.String",
     paramTypes: ["java.lang.String"]
-} external;
-
-isolated function replaceAllExternal(handle originalString, handle regex, handle replacement) returns handle = @java:Method {
-    name: "replaceAll",
-    'class: "java.lang.String",
-    paramTypes: ["java.lang.String", "java.lang.String"]
 } external;
 
 isolated function replaceFirstExternal(handle originalString, handle regex, handle replacement) returns handle = @java:Method {
@@ -120,7 +211,39 @@ isolated function splitExternal(handle receiver, handle delimiter) returns handl
 } external;
 
 isolated function getBallerinaStringArray(handle h) returns string[] = @java:Method {
-    'class:"io.ballerina.runtime.api.utils.StringUtils",
-    name:"fromStringArray",
-    paramTypes:["[Ljava.lang.String;"]
+    'class: "io.ballerina.runtime.api.utils.StringUtils",
+    name: "fromStringArray",
+    paramTypes: ["[Ljava.lang.String;"]
+} external;
+
+isolated function getMatcherFromPattern(handle patternJObj, handle input) returns handle = @java:Method {
+    name: "matcher",
+    'class: "java.util.regex.Pattern"
+} external;
+
+isolated function isMatched(handle matcherObj) returns boolean = @java:Method {
+    name: "find",
+    'class: "java.util.regex.Matcher"
+} external;
+
+isolated function getGroup(handle matcherObj, int index) returns handle = @java:Method {
+    name: "group",
+    'class: "java.util.regex.Matcher",
+    paramTypes: ["int"]
+} external;
+
+isolated function getStartIndex(handle matcherObj) returns int = @java:Method {
+    name: "start",
+    'class: "java.util.regex.Matcher"
+} external;
+
+isolated function getEndIndex(handle matcherObj) returns int = @java:Method {
+    name: "end",
+    'class: "java.util.regex.Matcher"
+} external;
+
+// handle exceptions
+isolated function regexCompile(handle regex) returns handle = @java:Method {
+    name: "compile",
+    'class: "java.util.regex.Pattern"
 } external;
