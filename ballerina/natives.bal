@@ -69,8 +69,8 @@ public isolated function replace(string originalString, string regex, Replacemen
 # + originalString - The original string to replace the occurrences of the
 #                    substrings that match the provided regex
 # + regex - The regex to match the substrings in the `originalString` , which is to be replaced
-# + replacement - The replacement string to replace the substrings, which
-#                 match the regex
+# + replacement - The replacement string or a function to be invoked to create the new substring to be
+#                 used to replace the first match to the given regex
 # + return - The resultant string with the replaced substrings
 public isolated function replaceAll(string originalString, string regex, Replacement replacement) returns string {
     Match[] matchedArray = searchAll(originalString, regex);
