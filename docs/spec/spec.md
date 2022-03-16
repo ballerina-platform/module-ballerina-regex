@@ -74,7 +74,7 @@ public isolated function split(string receiver, string delimiter) returns string
 
 ## 2.4. Search
 
-The search APIs extract substring/s of the string. 
+The search APIs extract substring/s of the string that matches the provided regex. It provides details of the matches such as substring value, start index, end index, and matched regex groups
 
 The following records are used to hold the results of a match against a regular expression.
 
