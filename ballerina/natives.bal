@@ -186,24 +186,6 @@ public isolated function searchAll(string str, string regex) returns Match[] {
     return matched;
 }
 
-isolated function getPartMatch(handle matcher, int groupCount, int startIndex = 0) returns PartMatch[] {
-    int i = 0;
-    PartMatch[] partMatch = [];
-    while i <= groupCount {
-        handle group = getGroup(matcher, i);
-        string? valueInString = java:toString(group);
-        if valueInString is string {
-            partMatch.push(
-                {
-                matched: valueInString,
-                startIndex: getGroupStartIndex(matcher, i) + startIndex,
-                endIndex: getGroupEndIndex(matcher, i) + startIndex
-            });
-        }
-        i += 1;
-    }
-    return partMatch;
-}
 // Interoperable external functions.
 isolated function matchesExternal(handle stringToMatch, handle regex) returns boolean = @java:Method {
     name: "matches",
