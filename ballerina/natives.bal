@@ -146,18 +146,16 @@ public isolated function split(string receiver, string delimiter) returns string
 public isolated function search(string str, string regex, int startIndex = 0) returns Match? {
     string extractedString = getSubstring(str, startIndex);
     handle matcher = getMatcher(extractedString, regex);
+    int groupCount = getGroupCount(matcher);
     if isMatched(matcher) {
-        handle group = getGroup(matcher, 0);
-        string? value = java:toString(group);
-        if value is string {
-            Match matched = {
-                matched: value,
-                startIndex: getStartIndex(matcher) + startIndex,
-                endIndex: getEndIndex(matcher) + startIndex,
-                groups: new MatchGroups(matcher, startIndex)
-            };
-            return matched;
-        }
+        PartMatch[] partMatch = getPartMatch(matcher, groupCount, startIndex);
+        Match matched = {
+            matched: partMatch[0].matched,
+            startIndex: partMatch[0].startIndex,
+            endIndex: partMatch[0].endIndex,
+            groups: new MatchGroups(partMatch, groupCount)
+        };
+        return matched;
     }
     return ();
 }
@@ -174,23 +172,38 @@ public isolated function search(string str, string regex, int startIndex = 0) re
 public isolated function searchAll(string str, string regex) returns Match[] {
     handle matcher = getMatcher(str, regex);
     Match[] matched = [];
+    int groupCount = getGroupCount(matcher);
     while isMatched(matcher) {
-        handle group = getGroup(matcher, 0);
-        string? valueInString = java:toString(group);
-        if valueInString is string {
-            int startIndex = getStartIndex(matcher);
-            matched.push(
-                {
-                matched: valueInString,
-                startIndex: startIndex,
-                endIndex: getEndIndex(matcher),
-                groups: new MatchGroups(matcher, startIndex, regex, valueInString)
-            });
-        }
+        PartMatch[] partMatch = getPartMatch(matcher, groupCount);
+        matched.push(
+            {
+            matched: partMatch[0].matched,
+            startIndex: partMatch[0].startIndex,
+            endIndex: partMatch[0].endIndex,
+            groups: new MatchGroups(partMatch, groupCount)
+        });
     }
     return matched;
 }
 
+isolated function getPartMatch(handle matcher, int groupCount, int startIndex = 0) returns PartMatch[] {
+    int i = 0;
+    PartMatch[] partMatch = [];
+    while i <= groupCount {
+        handle group = getGroup(matcher, i);
+        string? valueInString = java:toString(group);
+        if valueInString is string {
+            partMatch.push(
+                {
+                matched: valueInString,
+                startIndex: getGroupStartIndex(matcher, i) + startIndex,
+                endIndex: getGroupEndIndex(matcher, i) + startIndex
+            });
+        }
+        i += 1;
+    }
+    return partMatch;
+}
 // Interoperable external functions.
 isolated function matchesExternal(handle stringToMatch, handle regex) returns boolean = @java:Method {
     name: "matches",
@@ -242,8 +255,24 @@ isolated function getEndIndex(handle matcherObj) returns int = @java:Method {
     'class: "java.util.regex.Matcher"
 } external;
 
-// handle exceptions
 isolated function regexCompile(handle regex) returns handle = @java:Method {
     name: "compile",
     'class: "java.util.regex.Pattern"
+} external;
+
+isolated function getGroupStartIndex(handle matcherObj, int index) returns int = @java:Method {
+    name: "start",
+    'class: "java.util.regex.Matcher",
+    paramTypes: ["int"]
+} external;
+
+isolated function getGroupEndIndex(handle matcherObj, int index) returns int = @java:Method {
+    name: "end",
+    'class: "java.util.regex.Matcher",
+    paramTypes: ["int"]
+} external;
+
+isolated function getGroupCount(handle matcherObj) returns int = @java:Method {
+    name: "groupCount",
+    'class: "java.util.regex.Matcher"
 } external;
