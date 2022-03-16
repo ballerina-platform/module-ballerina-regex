@@ -21,8 +21,10 @@ The conforming implementation of the specification is released and included in t
 2. [Operations](#2-operations)
     * 2.1. [Matches](#21-matches)
     * 2.2. [Replace All](#22-replace-all)
-    * 2.3. [Replace First](#23-replace-first)
+    * 2.3. [Replace](#23-replace)
     * 2.4. [Split](#24-split)
+    * 2.5. [Search All](#25-search-all)
+    * 2.6. [Search](#26-search)
 
 # 1. Overview
 This library is based on [regular expressions](https://en.wikipedia.org/wiki/Regular_expression), which are notations 
@@ -43,15 +45,27 @@ replacement string.
 public isolated function replaceAll(string originalString, string regex, string replacement) returns string;
 ```
 
-## 2.3. Replace First
-This replaces only the first occurrence of the substring that matches the provided regex in the original string with 
-the provided replacement string.
+## 2.3. Replace
+This replaces only the first occurrence of the substring from the given `startIndex` that matches the provided regex in the original string with
+the provided replacement string or string returned by the provided function.
 ```ballerina
-public isolated function replaceFirst(string originalString, string regex, string replacement) returns string;
+public isolated function replace(string originalString, string regex, Replacement replacement, int startIndex = 0) returns string;
 ```
 
 ## 2.4. Split
 This splits a string into an array of substrings, using the provided regex as the delimiter.
 ```ballerina
 public isolated function split(string receiver, string delimiter) returns string[];
+```
+
+## 2.5. Search All
+This is used to get all substrings in string that match the regex.
+```ballerina
+public isolated function searchAll(string str, string regex) returns Match[];
+```
+
+## 2.6. Search
+This is used to get the first substring from the start index in the given string that matches the regex.
+```ballerina
+public isolated function search(string str, string regex, int startIndex = 0) returns Match?;
 ```
