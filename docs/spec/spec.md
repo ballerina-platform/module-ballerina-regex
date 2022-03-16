@@ -20,10 +20,9 @@ The conforming implementation of the specification is released and included in t
 1. [Overview](#1-overview)
 2. [Operations](#2-operations)
     * 2.1. [Matches](#21-matches)
-    * 2.2. [Replace All](#22-replace-all)
-    * 2.3. [Replace](#23-replace)
-    * 2.4. [Split](#24-split)
-    * 2.5. [Search](#25-search)
+    * 2.2. [Replace](#22-replace)
+    * 2.3. [Split](#23-split)
+    * 2.4. [Search](#24-search)
 
 # 1. Overview
 This library is based on [regular expressions](https://en.wikipedia.org/wiki/Regular_expression), which are notations 
@@ -67,13 +66,13 @@ the provided replacement string or string returned by the provided function.
 public isolated function replace(string originalString, string regex, Replacement replacement, int startIndex = 0) returns string;
 ```
 
-## 2.4. Split
+## 2.3. Split
 This splits a string into an array of substrings, using the provided regex as the delimiter.
 ```ballerina
 public isolated function split(string receiver, string delimiter) returns string[];
 ```
 
-## 2.5. Search
+## 2.4. Search
 
 The search APIs extract substring/s of the string. 
 
