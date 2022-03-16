@@ -85,9 +85,9 @@ The following records are used to hold the results of a match against a regular 
 # + startIndex - The start index of the match
 # + endIndex - The last index of the match
 type PartMatch record {|
-string matched;
-int startIndex;
-int endIndex;
+   string matched;
+   int startIndex;
+   int endIndex;
 |};
 ```
 
@@ -97,9 +97,9 @@ int endIndex;
 #
 # + groups - Information about matched regex groups
 public type Match record {|
-// The match for the whole regex
-*PartMatch;
-Groups groups;
+   // The match for the whole regex
+   *PartMatch;
+   Groups groups;
 |};
 ```
 
@@ -108,11 +108,11 @@ This `Groups` object handles the matches with the group of regex.
 ```ballerina
 # Holds information about matched regex groups
 public type Groups readonly & object {
-int count;
-// Capture groups are indexed from 1
-// Group 0 means whole regex
-// Panics if i < 0 or > count
-isolated function get(int i) returns PartMatch?;
+   int count;
+   // Capture groups are indexed from 1
+   // Group 0 means whole regex
+   // Panics if i < 0 or > count
+   isolated function get(int i) returns PartMatch?;
 };
 ```
 
