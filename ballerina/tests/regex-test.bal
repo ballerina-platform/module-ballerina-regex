@@ -90,6 +90,33 @@ isolated function testReplaceFirst() {
 }
 
 @test:Config {}
+isolated function testReplaceFirst1() {
+    string original = "ReplaceThisThisTextThis";
+    string regex = "This";
+    string replacement = "$ ";
+    string actualvalue = replaceFirst(original, regex, replacement);
+    test:assertEquals(actualvalue, "Replace$ ThisTextThis", msg = "String values are not equal");
+}
+
+@test:Config {}
+isolated function testReplaceFirst2() {
+    string original = "ReplaceThisThisTextThis";
+    string regex = "This";
+    string replacement = "$1 ";
+    string actualvalue = replaceFirst(original, regex, replacement);
+    test:assertEquals(actualvalue, "Replace$1 ThisTextThis", msg = "String values are not equal");
+}
+
+@test:Config {}
+isolated function testReplaceFirst3() {
+    string original = "ReplaceThisThisTextThis";
+    string regex = "This";
+    string replacement = "$this ";
+    string actualvalue = replaceFirst(original, regex, replacement);
+    test:assertEquals(actualvalue, "Replace$this ThisTextThis", msg = "String values are not equal");
+}
+
+@test:Config {}
 isolated function testReplace() {
     string original = "10010011";
     string regex = "0+";
