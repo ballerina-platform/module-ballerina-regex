@@ -23,8 +23,7 @@ The conforming implementation of the specification is released and included in t
     * 2.2. [Replace All](#22-replace-all)
     * 2.3. [Replace](#23-replace)
     * 2.4. [Split](#24-split)
-    * 2.5. [Search All](#25-search-all)
-    * 2.6. [Search](#26-search)
+    * 2.5. [Search](#25-search)
 
 # 1. Overview
 This library is based on [regular expressions](https://en.wikipedia.org/wiki/Regular_expression), which are notations 
@@ -38,15 +37,31 @@ This is used to check whether a string matches the provided regex.
 public isolated function matches(string stringToMatch, string regex) returns boolean;
 ```
 
-## 2.2. Replace All
-This replaces all occurrences of substrings that matches the provided regex in the original string with the provided
-replacement string.
+## 2.2. Replace
+
+The replace APIs are used to replace the occurrence/s of substrings that matches the provided regex in the original
+string with the provided replacement string or string returned by the provided function. The following function and 
+type are used to provide the constant or dynamic replacement string. 
+
 ```ballerina
-public isolated function replaceAll(string originalString, string regex, string replacement) returns string;
+ # A function to be invoked to create the new substring to be used to replace the matches.
+ type ReplacerFunction function(Match matched) returns string;
+ ```
+
+```ballerina
+ # A function to be invoked to create the new substring or string value to be used to replace the matches.
+ public type Replacement ReplacerFunction|string;
+ ```
+
+The following APIs are provided to replace the matches:
+
+- To replace all occurrences of substrings that matches the provided regex in the original string with the provided
+replacement string or string returned by the provided function.
+```ballerina
+public isolated function replaceAll(string originalString, string regex, Replacement replacement) returns string;
 ```
 
-## 2.3. Replace
-This replaces only the first occurrence of the substring from the given `startIndex` that matches the provided regex in the original string with
+- To replace only the first occurrence of the substring from the start index that matches the provided regex in the original string with
 the provided replacement string or string returned by the provided function.
 ```ballerina
 public isolated function replace(string originalString, string regex, Replacement replacement, int startIndex = 0) returns string;
@@ -58,14 +73,57 @@ This splits a string into an array of substrings, using the provided regex as th
 public isolated function split(string receiver, string delimiter) returns string[];
 ```
 
-## 2.5. Search All
-This is used to get all substrings in string that match the regex.
+## 2.5. Search
+
+The search APIs extract substring/s of the string. 
+
+The following records are used to hold the results of a match against a regular expression.
+
+```ballerina
+# Holds the matched substring and its position in the input string.
+#
+# + matched - Matched substring
+# + startIndex - The start index of the match
+# + endIndex - The last index of the match
+type PartMatch record {|
+string matched;
+int startIndex;
+int endIndex;
+|};
+```
+
+```ballerina
+# Holds the results of a match against a regular expression.
+# It contains the match boundaries, groups and group boundaries.
+#
+# + groups - Information about matched regex groups
+public type Match record {|
+// The match for the whole regex
+*PartMatch;
+Groups groups;
+|};
+```
+
+This `Groups` object handles the matches with the group of regex.
+
+```ballerina
+# Holds information about matched regex groups
+public type Groups readonly & object {
+int count;
+// Capture groups are indexed from 1
+// Group 0 means whole regex
+// Panics if i < 0 or > count
+isolated function get(int i) returns PartMatch?;
+};
+```
+
+The following APIs are provided by the regex module to extract string/s.
+- To get all substrings in string that match the regex.
 ```ballerina
 public isolated function searchAll(string str, string regex) returns Match[];
 ```
 
-## 2.6. Search
-This is used to get the first substring from the start index in the given string that matches the regex.
+- To get the first substring from the start index in the given string that matches the regex.
 ```ballerina
 public isolated function search(string str, string regex, int startIndex = 0) returns Match?;
 ```
