@@ -18,6 +18,8 @@ import ballerina/jballerina.java;
 import ballerina/lang.'string as strings;
 
 # Checks whether the given string matches the provided regex.
+# Note that `\\` is used as for escape sequence and `\\\\` is used to inserts a backslash
+# character in the string or regular expression.
 # ```ballerina
 # boolean isMatched = regex:matches("Ballerina is great", "Ba[a-z ]+");
 # ```
@@ -31,6 +33,8 @@ public isolated function matches(string stringToMatch, string regex) returns boo
 
 # Replaces the first substring that matches the given regex with
 # the provided replacement string or string returned by the provided function.
+# Note that `\\` is used as for escape sequence and `\\\\` is used to inserts a backslash
+# character in the string or regular expression.
 # ```ballerina
 # string result = regex:replace("Ballerina is great", "\\s+", "_");
 # ```
@@ -60,8 +64,9 @@ public isolated function replace(string originalString, string regex, Replacemen
 }
 
 # Replaces each occurrence of the substrings, which match the provided
-# regex from the given original string value with the
-# provided replacement string.
+# regex from the given original string value with the provided replacement string.
+# Note that `\\` is used as for escape sequence and `\\\\` is used to inserts a backslash
+# character in the string or regular expression.
 # ```ballerina
 # string result = regex:replaceAll("Ballerina is great", "\\s+", "_");
 # ```
@@ -92,6 +97,8 @@ public isolated function replaceAll(string originalString, string regex, Replace
 
 # Replaces the first substring that matches the given regex with
 # the provided replacement string.
+# Note that `\\` is used as for escape sequence and `\\\\` is used to inserts a backslash
+# character in the string or regular expression.
 # ```ballerina
 # string result = regex:replaceFirst("Ballerina is great", "\\s+", "_");
 # ```
@@ -107,20 +114,13 @@ public isolated function replaceAll(string originalString, string regex, Replace
 # This function will be removed in a later. Use `replace` instead.
 @deprecated
 public isolated function replaceFirst(string originalString, string regex, string replacement) returns string {
-    handle|error value = trap replaceFirstExternal(java:fromString(originalString), java:fromString(regex),
-                                                   java:fromString(replacement));
-    if value is handle {
-        string? updatedString = java:toString(value);
-        if updatedString is string {
-            return updatedString;
-        }
-        panic error(string `error occurred while replacing ${regex} in ${originalString}`);
-    }
-    panic error(string `error occurred while replacing ${regex} in ${originalString}: ` + value.detail().toString());
+    return replace(originalString, regex, replacement);
 }
 
 # Returns an array of strings by splitting a string using the provided
 # regex as the delimiter.
+# Note that `\\` is used as for escape sequence and `\\\\` is used to inserts a backslash
+# character in the string or regular expression.
 # ```ballerina
 # string[] result = regex:split("Ballerina is great", " ");
 # ```
@@ -134,6 +134,8 @@ public isolated function split(string receiver, string delimiter) returns string
 }
 
 # Returns the first substring in str that matches the regex.
+# Note that `\\` is used as for escape sequence and `\\\\` is used to inserts a backslash
+# character in the string or regular expression.
 # ```ballerina
 # regex:Match? result = regex:search("Betty Botter bought some butter but she said the butter’s bitter.",
 #                                    "\\b[bB].tt[a-z]*");
@@ -161,6 +163,8 @@ public isolated function search(string str, string regex, int startIndex = 0) re
 }
 
 # Returns all substrings in string that match the regex.
+# Note that `\\` is used as for escape sequence and `\\\\` is used to inserts a backslash
+# character in the string or regular expression.
 # ```ballerina
 # regex:Match[] result = regex:searchAll("Betty Botter bought some butter but she said the butter’s bitter.",
 #                                      "\\b[bB].tt[a-z]*");
