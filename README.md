@@ -15,15 +15,15 @@ character strings. If a particular string is in the set described by a regular e
 
 For a quick sample on demonstrating the usage, see [Ballerina By Examples](https://ballerina.io/learn/by-example/).
 
-## Issues and projects
+## Issues and Projects
 
 The **Issues** and **Projects** tabs are disabled for this repository as this is part of the Ballerina Standard Library. To report bugs, request new features, start new discussions, view project boards, etc., go to the Ballerina Standard Library [parent repository](https://github.com/ballerina-platform/ballerina-standard-library). 
 
 This repository contains only the source code of the package.
 
-## Build from the source
+## Building from the Source
 
-### Set up the prerequisites
+### Setting Up the Prerequisites
 
 * Download and install Java SE Development Kit (JDK) version 11 (from one of the following locations).
 
@@ -33,9 +33,9 @@ This repository contains only the source code of the package.
    
         > **Note:** Set the JAVA_HOME environment variable to the path name of the directory into which you installed JDK.
 
-### Build the source
+### Building the Source
 
-Execute the commands below to build from the source.
+Execute the commands below to build from source.
 
 1. To build the library:
 
@@ -69,17 +69,17 @@ Execute the commands below to build from the source.
 
         ./gradlew clean build -PpublishToCentral=true
         
-## Contribute to Ballerina
+## Contributing to Ballerina
 
 As an open source project, Ballerina welcomes contributions from the community. 
 
 For more information, go to the [contribution guidelines](https://github.com/ballerina-platform/ballerina-lang/blob/master/CONTRIBUTING.md).
 
-## Code of conduct
+## Code of Conduct
 
 All contributors are encouraged to read the [Ballerina Code of Conduct](https://ballerina.io/code-of-conduct).
 
-## Useful links
+## Useful Links
 
 * For more information go to the [`regex` library](https://lib.ballerina.io/ballerina/regex/latest).
 * For example demonstrations of the usage, go to [Ballerina By Examples](https://ballerina.io/learn/by-example/).
