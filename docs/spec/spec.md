@@ -23,19 +23,19 @@ The conforming implementation of the specification is released and included in t
     * 2.3. [Split](#23-split)
     * 2.4. [Search](#24-search)
 
-# 1. Overview
+## 1. Overview
 This library is based on [regular expressions](https://en.wikipedia.org/wiki/Regular_expression), which are notations 
 for describing sets of character strings that specify a search pattern. It supports the [regular expression patterns of Java](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/regex/Pattern.html#sum).
 
-# 2. Operations
+## 2. Operations
 
-## 2.1. Matches
+### 2.1. Matches
 This is used to check whether a string matches the provided regex.
 ```ballerina
 public isolated function matches(string stringToMatch, string regex) returns boolean;
 ```
 
-## 2.2. Replace
+### 2.2. Replace
 
 The replace APIs are used to replace the occurrence/s of substrings that matches the provided regex in the original
 string with the provided replacement string or string returned by the provided function. The following function and 
@@ -65,13 +65,13 @@ the provided replacement string or string returned by the provided function.
 public isolated function replace(string originalString, string regex, Replacement replacement, int startIndex = 0) returns string;
 ```
 
-## 2.3. Split
+### 2.3. Split
 This splits a string into an array of substrings, using the provided regex as the delimiter.
 ```ballerina
 public isolated function split(string receiver, string delimiter) returns string[];
 ```
 
-## 2.4. Search
+### 2.4. Search
 
 The search APIs extract substring/s of the string that matches the provided regex. It provides details of the matches such as substring value, start index, end index, and matched regex groups
 
