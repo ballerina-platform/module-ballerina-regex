@@ -18,10 +18,10 @@ The conforming implementation of the specification is released and included in t
 ## Contents
 1. [Overview](#1-overview)
 2. [Operations](#2-operations)
-    * 2.1. [Matches](#21-matches)
-    * 2.2. [Replace](#22-replace)
-    * 2.3. [Split](#23-split)
-    * 2.4. [Search](#24-search)
+   * 2.1. [Matches](#21-matches)
+   * 2.2. [Replace](#22-replace)
+   * 2.3. [Split](#23-split)
+   * 2.4. [Search](#24-search)
 
 ## 1. Overview
 This library is based on [regular expressions](https://en.wikipedia.org/wiki/Regular_expression), which are notations 
