@@ -2,10 +2,11 @@ Ballerina Regex Library
 ==============================
 
   [![Build](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-timestamped-master.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-timestamped-master.yml)
+  [![codecov](https://codecov.io/gh/ballerina-platform/module-ballerina-regex/branch/main/graph/badge.svg)](https://codecov.io/gh/ballerina-platform/module-ballerina-regex)
   [![Trivy](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/trivy-scan.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/trivy-scan.yml)
+  [![GraalVM Check](https://img.shields.io/github/workflow/status/ballerina-platform/module-ballerina-regex/Build%20with%20bal%20test%20native?label=GraalVM%20Check)](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-with-bal-test-native.yml)  
   [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerina-regex.svg)](https://github.com/ballerina-platform/module-ballerina-regex/commits/main)
   [![Github issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-standard-library/module/regex.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-standard-library/labels/module%2Fregex)
-  [![codecov](https://codecov.io/gh/ballerina-platform/module-ballerina-regex/branch/main/graph/badge.svg)](https://codecov.io/gh/ballerina-platform/module-ballerina-regex)
 
 This module provides APIs for searching, splitting, and replacing the set of characters of a string. These APIs are using a
 regular expression as a `String` to perform these operations by finding the string matches.
