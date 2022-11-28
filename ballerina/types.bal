@@ -19,7 +19,7 @@
 # + matched - Matched substring
 # + startIndex - The start index of the match
 # + endIndex - The last index of the match
-type PartMatch record {|
+public type PartMatch record {|
     string matched;
     int startIndex;
     int endIndex;
@@ -33,7 +33,7 @@ public type Groups readonly & object {
     // Capture groups are indexed from 1
     // Group 0 means whole regex
     // Panics if i < 0 or > count
-    isolated function get(int index) returns PartMatch?;
+    public isolated function get(int index) returns PartMatch?;
 };
 
 # Holds the results of a match against a regular expression. 
