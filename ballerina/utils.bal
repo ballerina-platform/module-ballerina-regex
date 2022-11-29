@@ -47,7 +47,7 @@ readonly class MatchGroups {
         self.count = groupCount;
     }
 
-    isolated function get(int index) returns PartMatch? {
+    public isolated function get(int index) returns PartMatch? {
         if index < 0 || index > self.count {
             panic error("There is no capturing group in the pattern with the given index " + index.toString() + ".");
         }
