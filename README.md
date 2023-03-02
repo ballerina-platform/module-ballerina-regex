@@ -1,4 +1,4 @@
-Ballerina Regex Library
+Ballerina Regex Librar
 ==============================
 
   [![Build](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-timestamped-master.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-timestamped-master.yml)
