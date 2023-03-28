@@ -1,3 +1,5 @@
+**Deprecation Notice:** This library is deprecated and will no longer be maintained or updated. We recommend that you migrate to [ballerina/lang.regexp](https://lib.ballerina.io/ballerina/lang.regexp/latest) library for continued support and updates.
+
 ## Package overview
 
 This module provides APIs for searching, splitting, and replacing the set of characters of a string. These APIs are using a
