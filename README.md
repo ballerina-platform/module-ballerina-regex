@@ -1,4 +1,4 @@
-Ballerina Regex Library
+Ballerina Regex Library [DEPRECATED]
 ==============================
 
   [![Build](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-timestamped-master.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-timestamped-master.yml)
@@ -7,6 +7,8 @@ Ballerina Regex Library
   [![GraalVM Check](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-with-bal-test-native.yml/badge.svg)](https://github.com/ballerina-platform/module-ballerina-regex/actions/workflows/build-with-bal-test-native.yml)  
   [![GitHub Last Commit](https://img.shields.io/github/last-commit/ballerina-platform/module-ballerina-regex.svg)](https://github.com/ballerina-platform/module-ballerina-regex/commits/main)
   [![Github issues](https://img.shields.io/github/issues/ballerina-platform/ballerina-standard-library/module/regex.svg?label=Open%20Issues)](https://github.com/ballerina-platform/ballerina-standard-library/labels/module%2Fregex)
+
+**Deprecation Notice:** This library is deprecated and will no longer be maintained or updated. We recommend that you migrate to [ballerina/lang.regexp](https://lib.ballerina.io/ballerina/lang.regexp/latest) library for continued support and updates.
 
 This module provides APIs for searching, splitting, and replacing the set of characters of a string. These APIs are using a
 regular expression as a `String` to perform these operations by finding the string matches.
