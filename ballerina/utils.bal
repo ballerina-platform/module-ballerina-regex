@@ -62,8 +62,8 @@ isolated function getPartMatch(handle matcher, int groupCount, int startIndex = 
     int i = 0;
     PartMatch[] partMatch = [];
     while i <= groupCount {
-        handle group = getGroup(matcher, i);
-        string? valueInString = java:toString(group);
+        handle 'group = getGroup(matcher, i);
+        string? valueInString = java:toString('group);
         if valueInString is string {
             partMatch.push(
                 {

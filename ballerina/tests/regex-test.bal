@@ -169,14 +169,14 @@ isolated function testSearchWithGroupIndex() {
         test:assertEquals(actualvalue.matched, "011", msg = "Incorrect string value");
         test:assertEquals(actualvalue.startIndex, 2, msg = "Incorrect string value");
         test:assertEquals(actualvalue.endIndex, 5, msg = "Incorrect string value");
-        Groups group = actualvalue.groups;
-        PartMatch? partMatch = group.get(1);
+        Groups 'group = actualvalue.groups;
+        PartMatch? partMatch = 'group.get(1);
         if partMatch is PartMatch {
             test:assertEquals(partMatch.matched, "0", msg = "Incorrect string value");
             test:assertEquals(partMatch.startIndex, 2, msg = "Incorrect string value");
             test:assertEquals(partMatch.endIndex, 3, msg = "Incorrect string value");
         }
-        PartMatch? partMatch1 = group.get(2);
+        PartMatch? partMatch1 = 'group.get(2);
         if partMatch1 is PartMatch {
             test:assertEquals(partMatch1.matched, "11", msg = "Incorrect string value");
             test:assertEquals(partMatch1.startIndex, 3, msg = "Incorrect string value");
@@ -196,26 +196,26 @@ isolated function testSearchWithStartIndex() {
         test:assertEquals(actualvalue.matched, "01111111", msg = "Incorrect string value");
         test:assertEquals(actualvalue.startIndex, 7, msg = "Incorrect string value");
         test:assertEquals(actualvalue.endIndex, 15, msg = "Incorrect string value");
-        Groups group = actualvalue.groups;
-        PartMatch? partMatch = group.get(0);
+        Groups 'group = actualvalue.groups;
+        PartMatch? partMatch = 'group.get(0);
         if partMatch is PartMatch {
             test:assertEquals(partMatch.matched, "01111111", msg = "Incorrect string value");
             test:assertEquals(partMatch.startIndex, 7, msg = "Incorrect string value");
             test:assertEquals(partMatch.endIndex, 15, msg = "Incorrect string value");
         }
-        partMatch = group.get(1);
+        partMatch = 'group.get(1);
         if partMatch is PartMatch {
             test:assertEquals(partMatch.matched, "0", msg = "Incorrect string value");
             test:assertEquals(partMatch.startIndex, 7, msg = "Incorrect string value");
             test:assertEquals(partMatch.endIndex, 8, msg = "Incorrect string value");
         }
-        partMatch = group.get(2);
+        partMatch = 'group.get(2);
         if partMatch is PartMatch {
             test:assertEquals(partMatch.matched, "1111111", msg = "Incorrect string value");
             test:assertEquals(partMatch.startIndex, 8, msg = "Incorrect string value");
             test:assertEquals(partMatch.endIndex, 15, msg = "Incorrect string value");
         }
-        PartMatch?|error err = trap group.get(3);
+        PartMatch?|error err = trap 'group.get(3);
         test:assertTrue(err is error);
         if err is error {
             test:assertEquals(err.message(), "There is no capturing group in the pattern with the given index 3.",
@@ -235,8 +235,8 @@ isolated function testSearchWithInvalidGroupIndex() {
         test:assertEquals(actualvalue.matched, "00", msg = "Incorrect string value");
         test:assertEquals(actualvalue.startIndex, 1, msg = "Incorrect string value");
         test:assertEquals(actualvalue.endIndex, 3, msg = "Incorrect string value");
-        Groups group = actualvalue.groups;
-        PartMatch?|error err = trap group.get(1);
+        Groups 'group = actualvalue.groups;
+        PartMatch?|error err = trap 'group.get(1);
         test:assertTrue(err is error);
         if err is error {
             test:assertEquals(err.message(), "There is no capturing group in the pattern with the given index 1.",
@@ -270,22 +270,22 @@ isolated function testSearchAllWithGroupIndex() {
     test:assertEquals(actualvalue[0].matched, "011", msg = "Incorrect string value");
     test:assertEquals(actualvalue[0].startIndex, 2, msg = "Incorrect start index");
     test:assertEquals(actualvalue[0].endIndex, 5, msg = "Incorrect end index");
-    Groups group = actualvalue[0].groups;
-    PartMatch? value = group.get(0);
+    Groups 'group = actualvalue[0].groups;
+    PartMatch? value = 'group.get(0);
     test:assertTrue(value is PartMatch);
     if value is PartMatch {
         test:assertEquals(value.matched, "011", msg = "Incorrect string value");
         test:assertEquals(value.startIndex, 2, msg = "Incorrect start index");
         test:assertEquals(value.endIndex, 5, msg = "Incorrect end index");
     }
-    value = group.get(1);
+    value = 'group.get(1);
     test:assertTrue(value is PartMatch);
     if value is PartMatch {
         test:assertEquals(value.matched, "0", msg = "Incorrect string value");
         test:assertEquals(value.startIndex, 2, msg = "Incorrect start index");
         test:assertEquals(value.endIndex, 3, msg = "Incorrect end index");
     }
-    value = group.get(2);
+    value = 'group.get(2);
     test:assertTrue(value is PartMatch);
     if value is PartMatch {
         test:assertEquals(value.matched, "11", msg = "Incorrect string value");
@@ -295,22 +295,22 @@ isolated function testSearchAllWithGroupIndex() {
     test:assertEquals(actualvalue[1].matched, "0111", msg = "Incorrect string value");
     test:assertEquals(actualvalue[1].startIndex, 7, msg = "Incorrect start index value");
     test:assertEquals(actualvalue[1].endIndex, 11, msg = "Incorrect end index value");
-    group = actualvalue[1].groups;
-    value = group.get(0);
+    'group = actualvalue[1].groups;
+    value = 'group.get(0);
     test:assertTrue(value is PartMatch);
     if value is PartMatch {
         test:assertEquals(value.matched, "0111", msg = "Incorrect string value");
         test:assertEquals(value.startIndex, 7, msg = "Incorrect start index");
         test:assertEquals(value.endIndex, 11, msg = "Incorrect end index");
     }
-    value = group.get(1);
+    value = 'group.get(1);
     test:assertTrue(value is PartMatch);
     if value is PartMatch {
         test:assertEquals(value.matched, "0", msg = "Incorrect string value");
         test:assertEquals(value.startIndex, 7, msg = "Incorrect start index");
         test:assertEquals(value.endIndex, 8, msg = "Incorrect end index");
     }
-    value = group.get(2);
+    value = 'group.get(2);
     test:assertTrue(value is PartMatch);
     if value is PartMatch {
         test:assertEquals(value.matched, "111", msg = "Incorrect string value");
