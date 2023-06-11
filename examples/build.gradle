@@ -24,7 +24,7 @@ description = 'Ballerina - Regex Examples'
 
 def ballerinaDist = "${project.rootDir}/target/ballerina-runtime"
 def examples = ["form-validator"]
-def nativeFlag = ""
+def graalvmFlag = ""
 
 clean {
     examples.forEach { example ->
@@ -34,8 +34,8 @@ clean {
 }
 
 task testExamples {
-    if (project.hasProperty('balNativeTest')) {
-         nativeFlag = '--native'
+    if (project.hasProperty('balGraalVMTest')) {
+         graalvmFlag = '--graalvm'
     }
     doLast {
         examples.each { example ->
@@ -43,9 +43,9 @@ task testExamples {
                 exec {
                     workingDir "${project.projectDir}/${example}"
                     if (Os.isFamily(Os.FAMILY_WINDOWS)) {
-                        commandLine 'cmd', '/c', "${ballerinaDist}/bin/bal.bat test ${nativeFlag} && exit %%ERRORLEVEL%%"
+                        commandLine 'cmd', '/c', "${ballerinaDist}/bin/bal.bat test ${graalvmFlag} && exit %%ERRORLEVEL%%"
                     } else {
-                        commandLine 'sh', '-c', "${ballerinaDist}/bin/bal test ${nativeFlag}"
+                        commandLine 'sh', '-c', "${ballerinaDist}/bin/bal test ${graalvmFlag}"
                     }
                 }
             } catch (Exception e) {
