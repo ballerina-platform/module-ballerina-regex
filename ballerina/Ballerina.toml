@@ -1,10 +1,10 @@
 [package]
 org = "ballerina"
 name = "regex"
-version = "1.4.4"
+version = "1.5.0"
 authors = ["Ballerina"]
 keywords = ["regex", "string", "regular expressions"]
 repository = "https://github.com/ballerina-platform/module-ballerina-regex"
 icon = "icon.png"
 license = ["Apache-2.0"]
-distribution = "2201.10.0-20241025-103700-5c9e6a27"
+distribution = "2201.12.0-20250226-081700-17d84e0f"
