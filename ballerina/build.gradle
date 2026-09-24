@@ -16,20 +16,16 @@
  */
 
 import org.apache.tools.ant.taskdefs.condition.Os
+import org.gradle.process.ExecOperations
 
-buildscript {
-    repositories {
-        maven {
-            url = 'https://maven.pkg.github.com/ballerina-platform/plugin-gradle'
-            credentials {
-                username System.getenv("packageUser")
-                password System.getenv("packagePAT")
-            }
-        }
-    }
-    dependencies {
-        classpath "io.ballerina:plugin-gradle:${project.ballerinaGradlePluginVersion}"
-    }
+import javax.inject.Inject
+
+abstract class BallerinaExecHelper {
+    @Inject abstract ExecOperations getExecOperations()
+}
+
+plugins {
+    id 'io.ballerina.plugin'
 }
 
 description = 'Ballerina - Regex Ballerina Generator'
@@ -54,8 +50,6 @@ def stripBallerinaExtensionVersion(String extVersion) {
     }
 }
 
-apply plugin: 'io.ballerina.plugin'
-
 ballerina {
     packageOrganization = packageOrg
     module = packageName
@@ -72,8 +66,9 @@ task updateTomlFiles {
 }
 
 task commitTomlFiles {
+    def execHelper = project.objects.newInstance(BallerinaExecHelper)
     doLast {
-        project.exec {
+        execHelper.execOperations.exec {
             ignoreExitValue true
             if (Os.isFamily(Os.FAMILY_WINDOWS)) {
                 commandLine 'cmd', '/c', "git commit -m \"[Automated] Update the native jar versions\" Ballerina.toml Dependencies.toml"
