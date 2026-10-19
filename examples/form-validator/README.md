@@ -70,7 +70,7 @@ This creates an HTTP service with the endpoint `/validate` on port 8080 that can
     ```
 
 
-### Validate User - method:`GET`
+### Validate User - method:`POST`
 * This would validate a provided JSON string to ensure it meets all the criteria needed for each field.
 * Example CURL request:
     ```shell
