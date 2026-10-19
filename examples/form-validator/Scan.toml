@@ -1,0 +1,4 @@
+# ballerina:13 matches the identifier name `passwordRegex`: it holds the regular expression used to validate the
+# strength of a user supplied password, not a password or any other credential.
+[rule]
+exclude = ["ballerina:13"]
